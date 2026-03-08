@@ -90,6 +90,10 @@ Video Frame
 Output: Labeled frame with boxes + violence score
 ```
 
+### Weights
+
+https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
+
 ### Configuration
 
 ```python
