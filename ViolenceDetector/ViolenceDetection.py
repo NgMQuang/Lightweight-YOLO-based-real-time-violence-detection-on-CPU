@@ -18,7 +18,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class ViolenceDetector:
-    def __init__(self, video_path, yolo_model = 'violence_yolo.onnx', temporalhead = 'gapconv1d.onnx', tracker='MOSSE', **kwargs):
+    def __init__(self, video_path, yolo_model = 'violence_yolo.onnx', temporalhead = 'gapconv1d.onnx', tracker='MEDIANFLOW', **kwargs):
 
         # open video
         self.cap = cv2.VideoCapture(video_path) if video_path else cv2.VideoCapture(0)   # '0' or path to video
@@ -154,8 +154,23 @@ class ViolenceDetector:
                         })
     
     def run(self):
+        """The debugging and analysis mode with visualization for system behavior understanding."""
+
+        # Timing tracking
+        timing_stats = {
+            'tracking': [],
+            'detection': [],
+            'matching': [],
+            'classifier': [],
+            'visualization': [],
+            'total_frame': []
+        }
+        
+        frame_count = 0
 
         while True: #For safety, put a condition to break loop if needed (e.g., max frames)
+            frame_start = time.time()
+            
             ret, frame = self.cap.read()
             if not ret:
                 break
@@ -163,6 +178,8 @@ class ViolenceDetector:
             is_classifier_frame = (self.frame_id % self.detect_interval == self.detect_interval//2)
 
             # ===== BETWEEN-FRAME TRACKING =====
+            tracking_start = time.time()
+            
             if not is_detect_frame:
                 for t in self.tracks:
                     if t['tracker'] is None or not t['tracker_ok']:
@@ -183,8 +200,13 @@ class ViolenceDetector:
                     else:
                         t['tracker_ok'] = False  # tracker lost target
                         t['conf'] *= self.tracker_failure_decay # decay confidence if tracker fails
+            
+            tracking_time = time.time() - tracking_start
+            timing_stats['tracking'].append(tracking_time)
 
             # ===== YOLO DETECTION =====
+            detection_start = time.time()
+            
             if is_detect_frame:
                 boxes, feature, areas = self.Detect(frame)
                 self.feats.append(feature)
@@ -198,7 +220,12 @@ class ViolenceDetector:
                     raw_boxes = boxes[top_idx]
                     raw_confs = confs[top_idx]
 
+                detection_time = time.time() - detection_start
+                timing_stats['detection'].append(detection_time)
+
                 # ===== MATCH YOLO → TRACKS =====
+                matching_start = time.time()
+                
                 if len(raw_boxes) > 0:
                     det_boxes = np.array(raw_boxes)
                     det_confs = np.array(raw_confs)
@@ -252,8 +279,16 @@ class ViolenceDetector:
                 # Prune dead tracks
                 self.tracks = [t for t in self.tracks if t['conf'] >= self.conf_off]
                 self.tracks = merge_overlapping_tracks(self.tracks) 
+                
+                matching_time = time.time() - matching_start
+                timing_stats['matching'].append(matching_time)
+            else:
+                timing_stats['detection'].append(0.0)
+                timing_stats['matching'].append(0.0)
 
             # ===== CLASSIFIER INFERENCE =====
+            classifier_start = time.time()
+            
             if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
                 # Run classifier on the last 8 features
                 seq = np.asarray(self.feats)  # shape: (8, 512)
@@ -277,7 +312,10 @@ class ViolenceDetector:
                     cv2.putText(frame, f"⚠ VIOLENCE: {violence_prob:.2f}", 
                                 (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.5, 
                                 (0, 0, 255), 3)
-
+            
+            classifier_time = time.time() - classifier_start
+            timing_stats['classifier'].append(classifier_time)
+            
             # ===== HYSTERESIS =====
             for t in self.tracks:
                 if t['conf'] >= self.conf_on:
@@ -286,6 +324,8 @@ class ViolenceDetector:
                     t['show'] = False
 
             # ===== DRAW =====
+            viz_start = time.time()
+            
             for i, t in enumerate(self.tracks):
                 if not t['show']:
                     continue
@@ -299,24 +339,135 @@ class ViolenceDetector:
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
             cv2.imshow("demo", frame)
+            
+            viz_time = time.time() - viz_start
+            timing_stats['visualization'].append(viz_time)
+            
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
+
+            frame_count += 1
+            total_frame_time = time.time() - frame_start
+            timing_stats['total_frame'].append(total_frame_time)
+            
+            # Log timing every 30 frames
+            if frame_count % 30 == 0:
+                self._log_timing_stats(timing_stats, frame_count)
 
             self.frame_id += 1
 
         self.cap.release()
         cv2.destroyAllWindows()
+        
+        # Final timing report
+        logger.info("=" * 80)
+        logger.info("FINAL TIMING ANALYSIS")
+        logger.info("=" * 80)
+        self._log_timing_stats(timing_stats, frame_count, final=True)
 
-    def val(self):
-        max_violence_prob = 0.0
-        climax_frame_id = -1
-        start_time = time.time()
-        while True: #For safety, put a condition to break loop if needed (e.g., max frames)
-            ret, frame = self.cap.read()
-            if not ret:
-                if climax_frame_id == -1:
-                    for i in range(8 - len(self.feats)):  # Append last feature if video ends before classifier frame
-                        self.feats.append(self.feats[-1])
+    def _log_timing_stats(self, timing_stats, frame_count, final=False):
+        """Log timing statistics for performance analysis."""
+        
+        def safe_avg(times):
+            """Calculate average, handling empty lists."""
+            return np.mean(times) if times else 0.0
+        
+        def safe_max(times):
+            """Calculate max, handling empty lists."""
+            return np.max(times) if times else 0.0
+        
+        def safe_min(times):
+            """Calculate min, handling empty lists."""
+            return np.min(times) if times else 0.0
+        
+        tracking_avg = safe_avg(timing_stats['tracking'])
+        detection_avg = safe_avg(timing_stats['detection'])
+        matching_avg = safe_avg(timing_stats['matching'])
+        classifier_avg = safe_avg(timing_stats['classifier'])
+        viz_avg = safe_avg(timing_stats['visualization'])
+        total_avg = safe_avg(timing_stats['total_frame'])
+        
+        tracking_max = safe_max(timing_stats['tracking'])
+        detection_max = safe_max(timing_stats['detection'])
+        matching_max = safe_max(timing_stats['matching'])
+        classifier_max = safe_max(timing_stats['classifier'])
+        viz_max = safe_max(timing_stats['visualization'])
+        total_max = safe_max(timing_stats['total_frame'])
+        
+        tracking_min = safe_min(timing_stats['tracking'])
+        detection_min = safe_min(timing_stats['detection'])
+        matching_min = safe_min(timing_stats['matching'])
+        classifier_min = safe_min(timing_stats['classifier'])
+        viz_min = safe_min(timing_stats['visualization'])
+        total_min = safe_min(timing_stats['total_frame'])
+        
+        # Calculate target FPS
+        target_fps = 1.0 / total_avg if total_avg > 0 else 0
+        
+        # Timing breakdown percentages
+        total_non_zero = tracking_avg + detection_avg + matching_avg + classifier_avg + viz_avg
+        
+        if total_non_zero > 0:
+            tracking_pct = (tracking_avg / total_non_zero) * 100
+            detection_pct = (detection_avg / total_non_zero) * 100
+            matching_pct = (matching_avg / total_non_zero) * 100
+            classifier_pct = (classifier_avg / total_non_zero) * 100
+            viz_pct = (viz_avg / total_non_zero) * 100
+        else:
+            tracking_pct = detection_pct = matching_pct = classifier_pct = viz_pct = 0
+        
+        status = "FINAL REPORT" if final else f"REPORT (Frame {frame_count})"
+        logger.info(f"\n{status}")
+        logger.info(f"Frames processed: {frame_count}")
+        logger.info(f"Average FPS: {target_fps:.2f}")
+        logger.info("")
+        logger.info("COMPONENT TIMING (milliseconds):")
+        logger.info(f"  Tracking:      avg={tracking_avg*1000:.3f}ms  min={tracking_min*1000:.3f}ms  max={tracking_max*1000:.3f}ms  ({tracking_pct:.1f}%)")
+        logger.info(f"  Detection:     avg={detection_avg*1000:.3f}ms  min={detection_min*1000:.3f}ms  max={detection_max*1000:.3f}ms  ({detection_pct:.1f}%)")
+        logger.info(f"  Matching:      avg={matching_avg*1000:.3f}ms  min={matching_min*1000:.3f}ms  max={matching_max*1000:.3f}ms  ({matching_pct:.1f}%)")
+        logger.info(f"  Classifier:    avg={classifier_avg*1000:.3f}ms  min={classifier_min*1000:.3f}ms  max={classifier_max*1000:.3f}ms  ({classifier_pct:.1f}%)")
+        logger.info(f"  Visualization: avg={viz_avg*1000:.3f}ms  min={viz_min*1000:.3f}ms  max={viz_max*1000:.3f}ms  ({viz_pct:.1f}%)")
+        logger.info("")
+        logger.info(f"  TOTAL FRAME:   avg={total_avg*1000:.3f}ms  min={total_min*1000:.3f}ms  max={total_max*1000:.3f}ms")
+        logger.info("=" * 80)
+
+        def val(self):
+            max_violence_prob = 0.0
+            climax_frame_id = -1
+            start_time = time.time()
+            while True: #For safety, put a condition to break loop if needed (e.g., max frames)
+                ret, frame = self.cap.read()
+                if not ret:
+                    if climax_frame_id == -1:
+                        for i in range(8 - len(self.feats)):  # Append last feature if video ends before classifier frame
+                            self.feats.append(self.feats[-1])
+                        seq = np.asarray(self.feats)  # shape: (8, 512)
+                        seq = np.expand_dims(seq, 0)    # (1, 8, 512)
+                        gap_output = self.GAPConv1D_session.run(
+                            [self.gap_output_name],
+                            {self.gap_input_name: seq}
+                        )
+
+                        logits = gap_output[0]  # shape: (1, 1)
+
+                        probs = 1.0 / (1.0 + np.exp(-logits))
+
+                        violence_prob = probs[0][0]
+                        if violence_prob > max_violence_prob:
+                            max_violence_prob = violence_prob
+                            climax_frame_id = self.frame_id
+                    break
+                is_detect_frame = (self.frame_id % self.detect_interval == 0)
+                is_classifier_frame = (self.frame_id % self.detect_interval == self.detect_interval//2)
+
+                # ===== YOLO DETECTION =====
+                if is_detect_frame:
+                    boxes, feature, areas = self.Detect(frame)
+                    self.feats.append(feature)
+
+                # ===== CLASSIFIER INFERENCE =====
+                if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
+                    # Run classifier on the last 8 features
                     seq = np.asarray(self.feats)  # shape: (8, 512)
                     seq = np.expand_dims(seq, 0)    # (1, 8, 512)
                     gap_output = self.GAPConv1D_session.run(
@@ -332,51 +483,21 @@ class ViolenceDetector:
                     if violence_prob > max_violence_prob:
                         max_violence_prob = violence_prob
                         climax_frame_id = self.frame_id
-                break
-            is_detect_frame = (self.frame_id % self.detect_interval == 0)
-            is_classifier_frame = (self.frame_id % self.detect_interval == self.detect_interval//2)
 
-            # ===== YOLO DETECTION =====
-            if is_detect_frame:
-                boxes, feature, areas = self.Detect(frame)
-                self.feats.append(feature)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
 
-            # ===== CLASSIFIER INFERENCE =====
-            if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
-                # Run classifier on the last 8 features
-                seq = np.asarray(self.feats)  # shape: (8, 512)
-                seq = np.expand_dims(seq, 0)    # (1, 8, 512)
-                gap_output = self.GAPConv1D_session.run(
-                    [self.gap_output_name],
-                    {self.gap_input_name: seq}
-                )
+                self.frame_id += 1
 
-                logits = gap_output[0]  # shape: (1, 1)
+            self.cap.release()
+            cv2.destroyAllWindows()
 
-                probs = 1.0 / (1.0 + np.exp(-logits))
-
-                violence_prob = probs[0][0]
-                if violence_prob > max_violence_prob:
-                    max_violence_prob = violence_prob
-                    climax_frame_id = self.frame_id
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
-            self.frame_id += 1
-
-        self.cap.release()
-        cv2.destroyAllWindows()
-
-        # ===== REPORTING =====
-        end_time = time.time()
-        logger.info(f"Validation complete. Total frames: {self.frame_id}, Max violence probability: {max_violence_prob:.4f}, Climax frame: {climax_frame_id}, Processing time: {end_time - start_time:.2f} seconds")
-        return max_violence_prob, climax_frame_id
-    def stream(self): pass
-
+            # ===== REPORTING =====
+            end_time = time.time()
+            logger.info(f"Validation complete. Total frames: {self.frame_id}, Max violence probability: {max_violence_prob:.4f}, Climax frame: {climax_frame_id}, Processing time: {end_time - start_time:.2f} seconds")
+            return max_violence_prob, climax_frame_id
 
 if __name__ == "__main__":
     video_path = "demovid/vid10.avi"  # Set to None or "0" for webcam
     detector = ViolenceDetector(video_path)
-
-    detector.val()
+    detector.run()
