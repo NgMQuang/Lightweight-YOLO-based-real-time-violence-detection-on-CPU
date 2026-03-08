@@ -72,7 +72,7 @@ The model shows a strong capacity for detecting violent events, as reflected by 
 
 ## 🎞 Demo
 
-[![Video Title](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+[![Video Title]([https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID](https://youtu.be/Dp1zRq-7fus))
 
 Performance (Raspberry Pi)
 
