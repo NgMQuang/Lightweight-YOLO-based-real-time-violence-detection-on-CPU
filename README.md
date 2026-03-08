@@ -72,7 +72,7 @@ The model shows a strong capacity for detecting violent events, as reflected by 
 
 ## 🎞 Demo
 
-[![Video Title](<iframe width="1393" height="784" src="https://www.youtube.com/embed/Dp1zRq-7fus" title="RaspberryPi5 Violence Detection demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>)
+Watch demo here: https://youtu.be/Dp1zRq-7fus
 
 Performance (Raspberry Pi)
 
