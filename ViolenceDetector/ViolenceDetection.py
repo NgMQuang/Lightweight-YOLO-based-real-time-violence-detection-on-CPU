@@ -372,8 +372,11 @@ class ViolenceDetector:
         end_time = time.time()
         logger.info(f"Validation complete. Total frames: {self.frame_id}, Max violence probability: {max_violence_prob:.4f}, Climax frame: {climax_frame_id}, Processing time: {end_time - start_time:.2f} seconds")
         return max_violence_prob, climax_frame_id
+    def stream(self): pass
+
 
 if __name__ == "__main__":
     video_path = "demovid/vid10.avi"  # Set to None or "0" for webcam
     detector = ViolenceDetector(video_path)
+
     detector.val()
