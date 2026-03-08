@@ -72,7 +72,18 @@ The model shows a strong capacity for detecting violent events, as reflected by 
 
 ## 🎞 Demo
 
-pass
+Performance (Raspberry Pi)
+
+Average FPS: 47.3
+Frame latency: 21 ms
+
+Pipeline timing:
+Detection:     14.5 ms
+Tracking:       1.8 ms
+Classifier:     0.15 ms
+Visualization:  0.33 ms
+
+!MAX DETECTION: 189ms
 
 ## 🏗️ Architecture
 
