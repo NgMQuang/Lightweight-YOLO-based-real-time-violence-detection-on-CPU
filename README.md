@@ -90,46 +90,7 @@ Video Frame
 Output: Labeled frame with boxes + violence score
 ```
 
-## 📦 Installation
-
-### Prerequisites
-- Python 3.8+
-- ONNX Runtime
-- OpenCV
-- NumPy
-
-### Setup
-
-```bash
-# Clone repository
-git clone https://github.com/QuangNgM/violence-detection.git
-cd violence-detection
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install Git LFS (for model files)
-git lfs install
-git lfs pull
-```
-
-## 🚀 Usage
-
-### Basic Usage
-
-```bash
-python run.py
-```
-
-By default, it processes `demovid/vid1.avi`. Edit the video path in `run.py`:
-
-```python
-cap = cv2.VideoCapture("path/to/your/video.avi")
-```
-
 ### Configuration
-
-Edit parameters in `run.py`:
 
 ```python
 FPS_VIDEO = 30                   # Video frame rate, auto read when assign video path
@@ -144,24 +105,6 @@ CONF_OFF = 0.1                   # Hide track threshold
 STICK_WEIGHT = 0.7               # Stickiness in scoring
 alpha = 0.8                      # EMA smoothing factor
 TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
-```
-
-## 📁 Project Structure
-
-```
-violence-detection/
-├── demovid                     # Videos for demo (removed on github)
-├── run.py                      # Main inference script
-├── utilities.py                # Helper functions (tracking, box operations)
-├── pipeline_analyzer.py        # Model analysis/debugging
-├── run_with_analysis.py        # Inference with detailed logging
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── LICENSE                     # License
-├── violence_yolo.onnx      # YOLO26 detection model
-├── gapconv1d.onnx          # Temporal classification model
-└── gapconv1d.onnx.data     # Model weights (LFS tracked)
-
 ```
 
 ## 🔍 How It Works
@@ -211,24 +154,6 @@ The script displays:
 - **Violence probability** when classified
 - **Alert** when violence confidence > 0.8
 
-### Keyboard Controls
-- `Q` - Quit
-
-## ⚙️ Advanced Usage
-
-### Adjust Violence Threshold
-
-```python
-if violence_prob > 0.8:  # Change threshold here
-    logger.warning(f"HIGH VIOLENCE DETECTED!")
-```
-
-### Enable Detailed Analysis
-
-```bash
-python run_with_analysis.py
-```
-
 ## 🔬 Dataset
 
 Models trained on custom dataset derived from **RWF2000** (Real World Fighting Dataset):
@@ -261,14 +186,3 @@ MIT
 - Movie Fight
 - RLVS
 
----
-
-## Quick Start Checklist
-
-- [ ] Clone repository
-- [ ] Install dependencies: `pip install -r requirements.txt`
-- [ ] Pull LFS models: `git lfs pull`
-- [ ] Place your video in project folder
-- [ ] Edit video path in `run.py`
-- [ ] Run: `python run.py`
-- [ ] Press Q to quit
