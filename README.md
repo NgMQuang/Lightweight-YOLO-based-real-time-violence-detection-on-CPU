@@ -101,7 +101,7 @@ Video Frame
     ↓
 [YOLO Detection] → Bounding boxes + Confidence -> [Tracker] → Track objects across frames
     ↓
-[Spatial feature Extraction] → 896-dim feature vectors
+[Spatial feature Extraction] → 896-dim x 15 feature vectors
     ↓
 [Temporal Classifier] → Violence probability (8-frame window)
     ↓
@@ -155,7 +155,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 ## 📊 Model Details
 
 ### YOLO26 (violence_yolo.onnx)
-- **Input**: 320×320 RGB images (normalized 0-1)
+- **Input**: 256×320 RGB images (normalized 0-1)
 - **Output**: 
   - Detections: (5, 6) - up to 5 boxes with [x1, y1, x2, y2, conf, class]
   - Features: (896, 15) - feature vector for temporal analysis
