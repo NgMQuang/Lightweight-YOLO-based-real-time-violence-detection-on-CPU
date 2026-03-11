@@ -23,20 +23,16 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 **Training metrics**
 
-| Metric | Value |
-|--------|-------|
-| mAP0.5| **0.75** |
-| Accuracy| **82.63%** |
-| Dataset Source | RWF2000 |
-| Input Resolution | 320×320 |
-
 * Classifier
 
-|Accuracy | 0.8263|
-|---------|-------|
-|Precision| 0.8182|
-|Recall   | 0.8424|
-|F1 Score | 0.8301|
+Accuracy:    0.8125
+Precision:   0.7990
+Recall:      0.8350
+F1 Score:    0.8166
+Specificity: 0.7900
+FPR:         0.2100
+FNR:         0.1650
+ROC-AUC:     0.8861
 
 * Suspicious area localization
 
@@ -47,7 +43,7 @@ Real-time violence detection using multi-object tracking and temporal classifica
 **Testing**
 
 To evaluate generalization ability, the model was tested on
-other datasets **without any training** on these datasets.
+other datasets **WITHOUT TRAINING** on these datasets.
 
 **Real life violence Situation**
 
