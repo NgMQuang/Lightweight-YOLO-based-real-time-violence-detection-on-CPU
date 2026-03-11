@@ -17,7 +17,9 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 **RWF2000**
 
-![Model Results](assets/confusion_analysis.png)
+![CM_RWF_val](assets/RWF_val_confusion_matrix.png)
+![ROC_RWF_val](assets/RWF_val_roc_curve.png)
+![ROC_RWF_val](assets/RWF_val_threshold_analysis.png)
 
 **Training metrics**
 
@@ -47,18 +49,9 @@ Real-time violence detection using multi-object tracking and temporal classifica
 To evaluate generalization ability, the model was tested on
 other datasets **without any training** on these datasets.
 
-**HockeyFight**
-
-![ROC_hkf](assets/roc_curve.png)
-![Threshold_hkf](assets/threshold_analysis.png)
-
-**Movies**
-
-![ROC_movie](assets/Peliculas_roc_curve.png)
-![Threshold_movie](assets/Peliculas_threshold_analysis.png)
-
 **Real life violence Situation**
 
+![CM_RLVS](assets/RLVS_confusion_matrix.png)
 ![ROC_RLVS](assets/RLVS_roc_curve.png)
 ![Threshold_RLVS](assets/RLVS_threshold_analysis.png)
 
