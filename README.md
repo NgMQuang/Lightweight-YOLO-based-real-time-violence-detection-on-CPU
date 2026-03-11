@@ -55,9 +55,7 @@ The model shows a strong capacity for detecting violent events, as reflected by 
 
 | Dataset     | ROC AUC |
 | ----------- | ------- |
-| MovieFight  | 0.71    |
-| HockeyFight | 0.86    |
-| RLVS        | 0.78    |
+| RLVS        | 0.9037  |
 
 ## 🎞 Demo
 
