@@ -25,14 +25,18 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 * Classifier
 
-Accuracy:    0.8125
-Precision:   0.7990
-Recall:      0.8350
-F1 Score:    0.8166
-Specificity: 0.7900
-FPR:         0.2100
-FNR:         0.1650
-ROC-AUC:     0.8861
+## Model Evaluation Results
+
+| Metric                        | Score  |
+| ----------------------------- | ------ |
+| **Accuracy**                  | 0.8125 |
+| **Precision**                 | 0.7990 |
+| **Recall**                    | 0.8350 |
+| **F1 Score**                  | 0.8166 |
+| **Specificity**               | 0.7900 |
+| **False Positive Rate (FPR)** | 0.2100 |
+| **False Negative Rate (FNR)** | 0.1650 |
+| **ROC–AUC**                   | 0.8861 |
 
 * Suspicious area localization
 
