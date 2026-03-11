@@ -7,7 +7,7 @@ Real-time violence detection using multi-object tracking and temporal classifica
 ## 🎯 Features
 
 - **Spatial Detection**: YOLO26 for real-time object detection and localization
-- **Multi-Object Tracking**: MOSSE tracker with confidence-based hysteresis
+- **Multi-Object Tracking**: Tracker with confidence-based hysteresis
 - **Temporal Classification**: Temporal classifier on 8-frame feature sequences
 - **Robust Tracking**: Automatic tracker failure recovery and confidence decay
 - **Real-time Performance**: Optimized for CPU and GPU inference
