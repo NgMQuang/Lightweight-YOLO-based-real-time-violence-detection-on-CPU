@@ -99,13 +99,11 @@ Visualization:  0.33 ms
 ```
 Video Frame
     ↓
-[YOLO Detection] → Bounding boxes + Confidence
+[YOLO Detection] → Bounding boxes + Confidence -> [Tracker] → Track objects across frames
     ↓
-[MOSSE Tracker] → Track objects across frames
+[Spatial feature Extraction] → 896-dim feature vectors
     ↓
-[Feature Extraction] → 512-dim feature vectors
-    ↓
-[GAPConv1D Classifier] → Violence probability (8-frame window)
+[Temporal Classifier] → Violence probability (8-frame window)
     ↓
 Output: Labeled frame with boxes + violence score
 ```
@@ -122,7 +120,7 @@ TOTAL_TIME_DETECT = 2.5          # Detection window (seconds), DO NOT CHANGE
 FRAME_PER_DETECT = 8             # Frames per classifier input, DO NOT CHANGE
 DETECT_INTERVAL = 10             # The code implementation already compute it automatedly
 
-TRACKER = "MOSSE"                # Tracker type, we found that MEDIANFLOW perform the most stability, but using MOSSE for fast demo
+TRACKER = "MEDIANFLOW"           # Tracker type, support MOSSE and KCF
 MAX_TRACKS = 5                   # Max simultaneous tracks, DO NOT CHANGE
 CONF_ON = 0.25                   # Show track threshold
 CONF_OFF = 0.1                   # Hide track threshold
@@ -160,14 +158,14 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 - **Input**: 320×320 RGB images (normalized 0-1)
 - **Output**: 
   - Detections: (5, 6) - up to 5 boxes with [x1, y1, x2, y2, conf, class]
-  - Features: (512,) - feature vector for temporal analysis
-- **Inference Time**: ~50-100ms (CPU)
+  - Features: (896, 15) - feature vector for temporal analysis
+- **Inference Time**: ~50-200ms (CPU)
 
-### GAPConv1D (gapconv1d.onnx)
-- **Input**: (8, 512) - 8 consecutive feature vectors
-- **Output**: (1,) - logit for binary classification
-- **Processing**: Global Average Pooling + Conv1D
-- **Inference Time**: ~5-10ms (CPU)
+### Temporal Classifier (temporal_classifier.onnx + .onnx.data)
+- **Input**: (8, 896, 15) - 8 consecutive feature vectors
+- **Output**: (2) - logit for binary classification [0] for fight and [1] for nofight
+- **Processing**: Conv1d x 3 !!! (Need an analysis here)
+- **Inference Time**: ~1-5ms (CPU)
 
 ## 🎮 Output
 
@@ -187,8 +185,8 @@ Models trained on custom dataset derived from **RWF2000** (Real World Fighting D
 - 82.63% accuracy on violence classification
 
 Dataset used for testing:
-- Hockey Fight
-- Movie Fight
+- Hockey Fight !!! (unable to test, prepare for v3)
+- Movie Fight !!! (unable to test, prepare for v3)
 - RLVS
 
 ## 📚 References
