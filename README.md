@@ -55,11 +55,30 @@ other datasets **WITHOUT TRAINING** on these datasets.
 ![ROC_RLVS](assets/RLVS_roc_curve.png)
 ![Threshold_RLVS](assets/RLVS_threshold_analysis.png)
 
-The model shows a strong capacity for detecting violent events, as reflected by consistently high recall across the evaluated datasets. This suggests that the system is capable of identifying most violent occurrences, supporting its potential applicability in real-world scenarios while maintaining an effective representation of violent activity patterns.
+## Model Evaluation Results (Experiment 2)
 
-| Dataset     | ROC AUC |
-| ----------- | ------- |
-| RLVS        | 0.9037  |
+| Metric                        | Score  |
+| ----------------------------- | ------ |
+| **Accuracy**                  | 0.7655 |
+| **Precision**                 | 0.7010 |
+| **Recall**                    | 0.9260 |
+| **F1 Score**                  | 0.7979 |
+| **Specificity**               | 0.6050 |
+| **False Positive Rate (FPR)** | 0.3950 |
+| **False Negative Rate (FNR)** | 0.0740 |
+| **ROC–AUC**                   | 0.9037 |
+
+### Summary
+
+This model configuration achieves **76.55% accuracy** with an **F1-score of 0.7979**.
+The **recall is very high (0.9260)**, meaning the model detects most positive cases (violence) but at the cost of more false alarms.
+
+* **False Positive Rate:** 39.5%
+* **False Negative Rate:** 7.4%
+
+The **ROC-AUC of 0.9037** indicates strong class separability despite the higher false positive rate.
+
+Overall, the model is **highly sensitive to positive events**, making it effective for capturing most violence cases, though further tuning may help reduce false positives.
 
 ## 🎞 Demo
 
