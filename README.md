@@ -25,8 +25,6 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 * Classifier
 
-## Model Evaluation Results
-
 | Metric                        | Score  |
 | ----------------------------- | ------ |
 | **Accuracy**                  | 0.8125 |
@@ -44,18 +42,17 @@ Real-time violence detection using multi-object tracking and temporal classifica
 |----------|------|------------|----------------------------------------------|
 |all       |3000  |    2865    |  0.712   -   0.704   -  0.754  -       0.425 |
 
-**Testing**
+##Testing
 
 To evaluate generalization ability, the model was tested on
 other datasets **WITHOUT TRAINING** on these datasets.
 
-**Real life violence Situation**
+**Real life violence Situation(Full)**
 
 ![CM_RLVS](assets/RLVS_confusion_matrix.png)
 ![ROC_RLVS](assets/RLVS_roc_curve.png)
 ![Threshold_RLVS](assets/RLVS_threshold_analysis.png)
 
-## Model Evaluation Results (Experiment 2)
 
 | Metric                        | Score  |
 | ----------------------------- | ------ |
