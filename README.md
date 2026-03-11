@@ -79,7 +79,7 @@ Overall, the model is **highly sensitive to positive events**, making it effecti
 
 ## 🎞 Demo
 
-Watch demo here: https://youtu.be/Dp1zRq-7fus
+Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
 Performance (Raspberry Pi)
 
