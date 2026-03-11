@@ -15,7 +15,7 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 ## 📊 Performance
 
-**RWF2000**
+**RWF2000(Val only)**
 
 ![CM_RWF_val](assets/RWF_val_confusion_matrix.png)
 ![ROC_RWF_val](assets/RWF_val_roc_curve.png)
