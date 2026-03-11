@@ -134,16 +134,16 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 ### 1. Detection Phase (Every N frames)
 - YOLO detects suspicious areas
 - Returns bounding boxes with confidence scores
-- Extracts 512-dimensional feature vectors
+- Extracts feature vectors
 
 ### 2. Tracking Phase (Between detections)
-- Tracker(MOSSE) updates box positions frame-to-frame
+- Tracker updates box positions frame-to-frame
 - Confidence scores decay if tracker fails
 - Boxes with low confidence are removed
 
 ### 3. Classification Phase (Every N frames)
 - Collects last 8 feature vectors
-- Passes to GAPConv1D temporal classifier
+- Passes to temporal classifier
 - Outputs violence probability (0.0 - 1.0)
 - Alerts if probability > 0.8
 
