@@ -18,7 +18,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class ViolenceDetector:
-    def __init__(self, video_path, yolo_model = 'violence_yolo.onnx', temporalhead = 'gapconv1d.onnx', tracker='MEDIANFLOW', **kwargs):
+    def __init__(self, video_path, yolo_model = 'violence_yolo.onnx', temporalhead = 'temporal_classifier.onnx', tracker='MEDIANFLOW', **kwargs):
 
         # open video
         self.cap = cv2.VideoCapture(video_path) if video_path else cv2.VideoCapture(0)   # '0' or path to video
@@ -35,7 +35,7 @@ class ViolenceDetector:
         logger.info(f"Video detected: {int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))}x"
                     f"{int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))} @ {self.fps_video}fps")
         
-        self.YoLO_session, self.GAPConv1D_session = self.load_onnx_models(yolo_model, temporalhead)
+        self.YoLO_session, self.TemporalClassifier_session = self.load_onnx_models(yolo_model, temporalhead)
         self.yolo_input_name, self.yolo_output_names, self.gap_input_name, self.gap_output_name = self.name_onnx_model()
         
 
@@ -57,7 +57,7 @@ class ViolenceDetector:
             (255, 0,   255),
         ])
 
-        self.resolution = kwargs.get("resolution", (320, 320))
+        self.resolution = kwargs.get("resolution", (256, 320)) # YOLO model input size (height, width)
 
         # Initialization
         self.frame_id   = 0
@@ -94,8 +94,8 @@ class ViolenceDetector:
         yolo_input_name = self.YoLO_session.get_inputs()[0].name
         yolo_output_names = [o.name for o in self.YoLO_session.get_outputs()]
 
-        gap_input_name = self.GAPConv1D_session.get_inputs()[0].name
-        gap_output_name = self.GAPConv1D_session.get_outputs()[0].name
+        gap_input_name = self.TemporalClassifier_session.get_inputs()[0].name
+        gap_output_name = self.TemporalClassifier_session.get_outputs()[0].name
         return yolo_input_name,yolo_output_names,gap_input_name,gap_output_name
     
     def Detect(self, frame)->tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -114,7 +114,7 @@ class ViolenceDetector:
         )
 
         detections = yolo_outputs[0]     # (1, 5, 6)
-        feature    = yolo_outputs[-1]     # (1, 512)
+        feature    = yolo_outputs[-1]     # (1, 896, 15)
 
         detections = np.squeeze(detections, axis=0)
         feature    = np.squeeze(feature, axis=0)
@@ -291,9 +291,9 @@ class ViolenceDetector:
             
             if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
                 # Run classifier on the last 8 features
-                seq = np.asarray(self.feats)  # shape: (8, 512)
-                seq = np.expand_dims(seq, 0)    # (1, 8, 512)
-                gap_output = self.GAPConv1D_session.run(
+                seq = np.asarray(self.feats)  # shape: (8,896, 15)
+                seq = np.expand_dims(seq, 0)    # (1, 8, 896, 15)
+                gap_output = self.TemporalClassifier_session.run(
                     [self.gap_output_name],
                     {self.gap_input_name: seq}
                 )
@@ -431,46 +431,19 @@ class ViolenceDetector:
         logger.info(f"  TOTAL FRAME:   avg={total_avg*1000:.3f}ms  min={total_min*1000:.3f}ms  max={total_max*1000:.3f}ms")
         logger.info("=" * 80)
 
-        def val(self):
-            max_violence_prob = 0.0
-            climax_frame_id = -1
-            start_time = time.time()
-            while True: #For safety, put a condition to break loop if needed (e.g., max frames)
-                ret, frame = self.cap.read()
-                if not ret:
-                    if climax_frame_id == -1:
-                        for i in range(8 - len(self.feats)):  # Append last feature if video ends before classifier frame
-                            self.feats.append(self.feats[-1])
-                        seq = np.asarray(self.feats)  # shape: (8, 512)
-                        seq = np.expand_dims(seq, 0)    # (1, 8, 512)
-                        gap_output = self.GAPConv1D_session.run(
-                            [self.gap_output_name],
-                            {self.gap_input_name: seq}
-                        )
-
-                        logits = gap_output[0]  # shape: (1, 1)
-
-                        probs = 1.0 / (1.0 + np.exp(-logits))
-
-                        violence_prob = probs[0][0]
-                        if violence_prob > max_violence_prob:
-                            max_violence_prob = violence_prob
-                            climax_frame_id = self.frame_id
-                    break
-                is_detect_frame = (self.frame_id % self.detect_interval == 0)
-                is_classifier_frame = (self.frame_id % self.detect_interval == self.detect_interval//2)
-
-                # ===== YOLO DETECTION =====
-                if is_detect_frame:
-                    boxes, feature, areas = self.Detect(frame)
-                    self.feats.append(feature)
-
-                # ===== CLASSIFIER INFERENCE =====
-                if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
-                    # Run classifier on the last 8 features
-                    seq = np.asarray(self.feats)  # shape: (8, 512)
-                    seq = np.expand_dims(seq, 0)    # (1, 8, 512)
-                    gap_output = self.GAPConv1D_session.run(
+    def val(self):
+        max_violence_prob = 0.0
+        climax_frame_id = -1
+        start_time = time.time()
+        while True: #For safety, put a condition to break loop if needed (e.g., max frames)
+            ret, frame = self.cap.read()
+            if not ret:
+                if climax_frame_id == -1:
+                    for i in range(8 - len(self.feats)):  # Append last feature if video ends before classifier frame
+                        self.feats.append(self.feats[-1])
+                    seq = np.asarray(self.feats)  # shape: (8, 896, 15)
+                    seq = np.expand_dims(seq, 0)    # (1, 8, , 896, 15)
+                    gap_output = self.TemporalClassifier_session.run(
                         [self.gap_output_name],
                         {self.gap_input_name: seq}
                     )
@@ -483,21 +456,49 @@ class ViolenceDetector:
                     if violence_prob > max_violence_prob:
                         max_violence_prob = violence_prob
                         climax_frame_id = self.frame_id
+                break
+            is_detect_frame = (self.frame_id % self.detect_interval == 0)
+            is_classifier_frame = (self.frame_id % self.detect_interval == self.detect_interval//2)
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
+            # ===== YOLO DETECTION =====
+            if is_detect_frame:
+                boxes, feature, areas = self.Detect(frame)
+                self.feats.append(feature)
 
-                self.frame_id += 1
+            # ===== CLASSIFIER INFERENCE =====
+            if is_classifier_frame and len(self.feats) >= FRAME_PER_DETECT:
+                # Run classifier on the last 8 features
+                seq = np.asarray(self.feats)  # shape: (8, 896, 15)
+                seq = np.expand_dims(seq, 0)    # (1, 8, 896, 15)
+                gap_output = self.TemporalClassifier_session.run(
+                    [self.gap_output_name],
+                    {self.gap_input_name: seq}
+                )
 
-            self.cap.release()
-            cv2.destroyAllWindows()
+                logits = gap_output[0]      # shape (1,2)
+                exp = np.exp(logits - np.max(logits))
+                probs = exp / exp.sum(axis=1, keepdims=True)
 
-            # ===== REPORTING =====
-            end_time = time.time()
-            logger.info(f"Validation complete. Total frames: {self.frame_id}, Max violence probability: {max_violence_prob:.4f}, Climax frame: {climax_frame_id}, Processing time: {end_time - start_time:.2f} seconds")
-            return max_violence_prob, climax_frame_id
+                violence_prob = probs[0][1]   # class 1 = violence
+
+                if violence_prob > max_violence_prob:
+                    max_violence_prob = violence_prob
+                    climax_frame_id = self.frame_id
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+            self.frame_id += 1
+
+        self.cap.release()
+        cv2.destroyAllWindows()
+
+        # ===== REPORTING =====
+        end_time = time.time()
+        logger.info(f"Validation complete. Total frames: {self.frame_id}, Max violence probability: {max_violence_prob:.4f}, Climax frame: {climax_frame_id}, Processing time: {end_time - start_time:.2f} seconds")
+        return max_violence_prob, climax_frame_id
 
 if __name__ == "__main__":
-    video_path = "demovid/vid10.avi"  # Set to None or "0" for webcam
+    video_path = "demovid/vid1.avi"  # Set to None or "0" for webcam
     detector = ViolenceDetector(video_path)
-    detector.run()
+    detector.val()
