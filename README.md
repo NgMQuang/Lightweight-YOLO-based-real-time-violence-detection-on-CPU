@@ -6,6 +6,18 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 Real-time violence detection using multi-object tracking and temporal classification. Detects and localizes violent behavior in video with bounding boxes and per-frame violence probability scores. Achieves 81% accuracy on RWF2000 and 50 FPS on Raspberry Pi 5 with max frame time ~150ms
 
+## Overview
+
+This project presents a lightweight violence detection system designed for real-time deployment on CPU-based edge devices.
+
+The system combines spatial detection and temporal analysis:
+
+• YOLO detects persons in video frames  
+• Motion-based ROI extracts interaction regions  
+• A temporal classifier analyzes frame sequences to detect violent behavior
+
+The goal is to achieve reliable violence detection while maintaining high inference speed on low-power hardware such as Raspberry Pi.
+
 ![System_Pipeline](assets/System_pipeline.png)
 
 ## 🎯 Features
