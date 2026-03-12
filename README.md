@@ -65,6 +65,13 @@ other datasets **WITHOUT TRAINING** on these datasets.
 | **False Negative Rate (FNR)** | 0.0740 |
 | **ROC–AUC**                   | 0.9037 |
 
+
+**HockeyFight(Full)**
+
+![CM_HKF](assets/hkfval_confusion_matrix.png)
+![ROC_HKF](assets/hkfval_roc_curve.png)
+![Threshold_HKF](assets/hkfval_threshold_analysis.png)
+
 ### Summary
 
 This model configuration achieves **76.55% accuracy** with an **F1-score of 0.7979**.
