@@ -173,7 +173,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Tốc độ suy giảm độ tin cậy khi tr
 - Xuất ra xác suất bạo lực (0.0 - 1.0)
 - Cảnh báo nếu xác suất > 0.8
 
-#### 4. Hysteresis & Hiển thị
+#### 4. Hysteresis(Khoảng đệm) & Hiển thị
 
 - Track được hiển thị/ẩn dựa trên ngưỡng độ tin cậy
 - Hộp giới hạn được tô màu kèm theo ID track
