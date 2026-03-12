@@ -72,6 +72,24 @@ other datasets **WITHOUT TRAINING** on these datasets.
 ![ROC_HKF](assets/hkfval_roc_curve.png)
 ![Threshold_HKF](assets/hkfval_threshold_analysis.png)
 
+==================================================
+METRICS
+==================================================
+Accuracy:    0.8090
+Precision:   0.7388
+Recall:      0.9560
+F1 Score:    0.8335
+Specificity: 0.6620
+FPR:         0.3380
+FNR:         0.0440
+ROC-AUC:     0.9247
+
+**MovieFight(Full)**
+
+![CM_MV](assets/Peliculas_confusion_matrix.png)
+![ROC_MV](assets/Peliculas_roc_curve.png)
+![Threshold_MV](assets/Peliculas_threshold_analysis.png)
+
 ### Summary
 
 This model configuration achieves **76.55% accuracy** with an **F1-score of 0.7979**.
