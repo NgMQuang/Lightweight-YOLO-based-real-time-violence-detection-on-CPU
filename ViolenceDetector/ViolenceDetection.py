@@ -7,8 +7,8 @@ from collections import deque
 import time
 
 #System parameters
-TOTAL_TIME_DETECT = 2.5               # Detection window duration (seconds)
-FRAME_PER_DETECT  = 8                 # Number of classifier inputs per window
+TOTAL_TIME_DETECT = 2.5 #1.64 for HKF and Movies    # Detection window duration (seconds)
+FRAME_PER_DETECT  = 8                               # Number of classifier inputs per window
 
 # Setup logging
 logging.basicConfig(
@@ -298,11 +298,12 @@ class ViolenceDetector:
                     {self.gap_input_name: seq}
                 )
 
-                logits = gap_output[0]  # shape: (1, 1)
+                logits = gap_output[0]   # shape (1,2)
 
-                probs = 1.0 / (1.0 + np.exp(-logits))
+                exp_logits = np.exp(logits)
+                probs = exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
 
-                violence_prob = probs[0][0]
+                violence_prob = probs[0][1]   # class index 1 = violence
                 logger.info(f"Frame {self.frame_id}: Violence probability = {violence_prob:.4f} "
                         f"(Active tracks: {len(self.tracks)})")
             
@@ -448,11 +449,13 @@ class ViolenceDetector:
                         {self.gap_input_name: seq}
                     )
 
-                    logits = gap_output[0]  # shape: (1, 1)
+                    logits = gap_output[0]   # shape (1,2)
 
-                    probs = 1.0 / (1.0 + np.exp(-logits))
+                    exp_logits = np.exp(logits)
+                    probs = exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
 
-                    violence_prob = probs[0][0]
+                    violence_prob = probs[0][1]   # class index 1 = violence
+
                     if violence_prob > max_violence_prob:
                         max_violence_prob = violence_prob
                         climax_frame_id = self.frame_id
@@ -499,6 +502,6 @@ class ViolenceDetector:
         return max_violence_prob, climax_frame_id
 
 if __name__ == "__main__":
-    video_path = "demovid/vid1.avi"  # Set to None or "0" for webcam
+    video_path = "demo.mp4"  # Set to None or "0" for webcam
     detector = ViolenceDetector(video_path)
-    detector.val()
+    detector.run()
