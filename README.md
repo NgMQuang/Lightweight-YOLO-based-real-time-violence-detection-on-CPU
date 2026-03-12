@@ -113,20 +113,6 @@ Pipeline timing:
 |Visualization | 0.683       | 0.284   | 43.064  |
 |Frame latency | 19.327      | 4.006   | 171.141 |
 
-## 🏗️ Architecture
-
-```
-Video Frame
-    ↓
-[YOLO Detection] → Bounding boxes + Confidence -> [Tracker] → Track objects across frames
-    ↓
-[Spatial feature Extraction] → 896-dim x 15 feature vectors
-    ↓
-[Temporal Classifier] → Violence probability (8-frame window)
-    ↓
-Output: Labeled frame with boxes + violence score
-```
-
 ### Weights
 
 https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
