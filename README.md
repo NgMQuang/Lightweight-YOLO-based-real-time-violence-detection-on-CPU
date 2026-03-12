@@ -90,6 +90,18 @@ ROC-AUC:     0.9247
 ![ROC_MV](assets/Peliculas_roc_curve.png)
 ![Threshold_MV](assets/Peliculas_threshold_analysis.png)
 
+==================================================
+METRICS
+==================================================
+Accuracy:    0.7463
+Precision:   0.8182
+Recall:      0.6300
+F1 Score:    0.7119
+Specificity: 0.8614
+FPR:         0.1386
+FNR:         0.3700
+ROC-AUC:     0.8574
+
 ### Summary
 
 This model configuration achieves **76.55% accuracy** with an **F1-score of 0.7979**.
