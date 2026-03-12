@@ -4,6 +4,8 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 Real-time violence detection using multi-object tracking and temporal classification. Detects and localizes violent behavior in video with bounding boxes and per-frame violence probability scores. Achieves 81% accuracy on RWF2000 and 50 FPS on Raspberry Pi 5 with max frame time ~150ms
 
+![System_Pipeline](assets/System_pipeline.png)
+
 ## 🎯 Features
 
 - **Spatial Detection**: YOLO26 for real-time object detection and localization
