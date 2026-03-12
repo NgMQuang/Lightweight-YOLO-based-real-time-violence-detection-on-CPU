@@ -1,4 +1,4 @@
-[English](README.md) | [Tiếng Việt](README_vi.md)
+[English](README.md) | [Tiếng Việt](README_Vie.md)
 
 Note: AI-assisted coding tools were used for minor implementation support
 
