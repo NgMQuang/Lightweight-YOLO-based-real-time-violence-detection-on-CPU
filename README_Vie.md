@@ -1,3 +1,4 @@
+[English](README.md) | [Tiếng Việt](README_Vie.md)
 Lưu ý: Các công cụ lập trình hỗ trợ bởi AI đã được sử dụng để hỗ trợ một phần nhỏ trong quá trình triển khai.
 
 ## Hệ thống phát hiện bạo lực với YOLO26 + Bộ phân loại theo thời gian
