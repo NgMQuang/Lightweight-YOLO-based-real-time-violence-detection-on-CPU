@@ -6,7 +6,7 @@ Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ tr
 
 Phát hiện bạo lực thời gian thực bằng cách kết hợp theo dõi nhiều đối tượng và phân loại theo chuỗi thời gian. Hệ thống phát hiện và khoanh vùng hành vi bạo lực trong video với các khung giới hạn và tỉ lệ xác suất bạo lực cho từng khung hình.
 
-![System_Pipeline](assets/System_pipeline.png)
+![System_Pipeline](assets/System_pipeline_VIE.png)
 
 ### 🎯 Tính năng
 
