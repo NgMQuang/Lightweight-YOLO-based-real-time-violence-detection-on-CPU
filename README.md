@@ -225,8 +225,8 @@ Dataset used for testing:
 
 ## Future Work
 
-• Improve spatial feature extraction
-• Optimize for embedded deployment
+- Improve spatial feature extraction
+- Optimize for embedded deployment
 
 ## 📚 References
 
