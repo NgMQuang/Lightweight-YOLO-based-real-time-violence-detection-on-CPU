@@ -95,34 +95,23 @@ other datasets **WITHOUT TRAINING** on these datasets.
 | **False Negative Rate (FNR)** | 0.3700 |
 | **ROC–AUC**                   | 0.8574 |     
 
-### Summary
-
-This model configuration achieves **76.55% accuracy** with an **F1-score of 0.7979**.
-The **recall is very high (0.9260)**, meaning the model detects most positive cases (violence) but at the cost of more false alarms.
-
-* **False Positive Rate:** 39.5%
-* **False Negative Rate:** 7.4%
-
-The **ROC-AUC of 0.9037** indicates strong class separability despite the higher false positive rate.
-
-Overall, the model is **highly sensitive to positive events**, making it effective for capturing most violence cases, though further tuning may help reduce false positives.
-
 ## 🎞 Demo
 
 Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
-Performance (Raspberry Pi)
+Performance (Raspberry Pi 5 CPU)
 
-Average FPS: 47.3
-Frame latency: 21 ms
+Average FPS: 51.74
 
 Pipeline timing:
-Detection:     14.5 ms
-Tracking:       1.8 ms
-Classifier:     0.15 ms
-Visualization:  0.33 ms
 
-!MAX DETECTION: 189ms
+|Task          | Average(ms) | Min(ms) | Max(ms) |
+|--------------|-------------|---------|---------|
+|Detection     | 10.426      | 0.000   | 165.764 |
+|Tracking      | 2.118       | 0.000   | 14.342  |
+|Classifier    | 0.542       | 0.000   | 15.600  |
+|Visualization | 0.683       | 0.284   | 43.064  |
+|Frame latency | 19.327      | 4.006   | 171.141 |
 
 ## 🏗️ Architecture
 
