@@ -51,10 +51,7 @@ other datasets **WITHOUT TRAINING** on these datasets.
 
 **Real life violence Situation(Full)**
 
-![CM_RLVS](assets/RLVS_confusion_matrix.png)
-![ROC_RLVS](assets/RLVS_roc_curve.png)
-![Threshold_RLVS](assets/RLVS_threshold_analysis.png)
-
+![RLVS](assets/RLVS.png)
 
 | Metric                        | Score  |
 | ----------------------------- | ------ |
