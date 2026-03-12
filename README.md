@@ -67,9 +67,7 @@ other datasets **WITHOUT TRAINING** on these datasets.
 
 **HockeyFight(Full)**
 
-![CM_HKF](assets/hkfval_confusion_matrix.png)
-![ROC_HKF](assets/hkfval_roc_curve.png)
-![Threshold_HKF](assets/hkfval_threshold_analysis.png)
+![HKF](assets/HKF.png)
 
 | Metric                        | Score  |
 | ----------------------------- | ------ |
@@ -84,9 +82,7 @@ other datasets **WITHOUT TRAINING** on these datasets.
 
 **MovieFight(Full)**
 
-![CM_MV](assets/Peliculas_confusion_matrix.png)
-![ROC_MV](assets/Peliculas_roc_curve.png)
-![Threshold_MV](assets/Peliculas_threshold_analysis.png)
+![MV](assets/Peliculas.png)
 
 | Metric                        | Score  |
 | ----------------------------- | ------ |
