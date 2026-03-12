@@ -14,8 +14,7 @@ This project presents a lightweight violence detection system designed for real-
 
 The system combines spatial detection and temporal analysis:
 
-• YOLO detects persons in video frames  
-• Motion-based ROI extracts interaction regions  
+• YOLO detects violence in video frames  
 • A temporal classifier analyzes frame sequences to detect violent behavior
 
 The goal is to achieve reliable violence detection while maintaining high inference speed on low-power hardware such as Raspberry Pi.
