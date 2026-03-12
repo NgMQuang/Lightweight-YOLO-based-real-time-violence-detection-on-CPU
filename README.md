@@ -211,6 +211,11 @@ Dataset used for testing:
 - Movie Fight
 - RLVS
 
+## Future Work
+
+• Improve spatial feature extraction
+• Optimize for embedded deployment
+
 ## 📚 References
 
 - YOLO26: https://github.com/ultralytics/ultralytics
