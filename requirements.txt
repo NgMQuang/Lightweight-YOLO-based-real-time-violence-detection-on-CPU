@@ -1,3 +1,4 @@
 onnxruntime
 cv2
 numpy
+logging
