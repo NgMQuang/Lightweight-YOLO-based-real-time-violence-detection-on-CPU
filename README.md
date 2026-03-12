@@ -117,6 +117,23 @@ Pipeline timing:
 
 https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
 
+## Installation
+```terminal
+
+git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+
+pip install -r requirements.txt
+```
+
+Download the weights and put inside ViolenceDetector folder
+
+```terminal
+
+cd ViolenceDetector
+python ViolenceDetection.py
+
+```
 ### Configuration
 
 ```python
