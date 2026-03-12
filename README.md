@@ -72,17 +72,16 @@ other datasets **WITHOUT TRAINING** on these datasets.
 ![ROC_HKF](assets/hkfval_roc_curve.png)
 ![Threshold_HKF](assets/hkfval_threshold_analysis.png)
 
-==================================================
-METRICS
-==================================================
-Accuracy:    0.8090
-Precision:   0.7388
-Recall:      0.9560
-F1 Score:    0.8335
-Specificity: 0.6620
-FPR:         0.3380
-FNR:         0.0440
-ROC-AUC:     0.9247
+| Metric                        | Score  |
+| ----------------------------- | ------ |
+| **Accuracy**                  | 0.8090 |
+| **Precision**                 | 0.7388 |
+| **Recall**                    | 0.9560 |
+| **F1 Score**                  | 0.6620 |
+| **Specificity**               | 0.7900 |
+| **False Positive Rate (FPR)** | 0.3380 |
+| **False Negative Rate (FNR)** | 0.0440 |
+| **ROC–AUC**                   | 0.9247 |  
 
 **MovieFight(Full)**
 
