@@ -89,17 +89,16 @@ other datasets **WITHOUT TRAINING** on these datasets.
 ![ROC_MV](assets/Peliculas_roc_curve.png)
 ![Threshold_MV](assets/Peliculas_threshold_analysis.png)
 
-==================================================
-METRICS
-==================================================
-Accuracy:    0.7463
-Precision:   0.8182
-Recall:      0.6300
-F1 Score:    0.7119
-Specificity: 0.8614
-FPR:         0.1386
-FNR:         0.3700
-ROC-AUC:     0.8574
+| Metric                        | Score  |
+| ----------------------------- | ------ |
+| **Accuracy**                  | 0.7463 |
+| **Precision**                 | 0.8182 |
+| **Recall**                    | 0.6300 |
+| **F1 Score**                  | 0.7119 |
+| **Specificity**               | 0.8614 |
+| **False Positive Rate (FPR)** | 0.1386 |
+| **False Negative Rate (FNR)** | 0.3700 |
+| **ROC–AUC**                   | 0.8574 |     
 
 ### Summary
 
