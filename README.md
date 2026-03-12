@@ -217,11 +217,11 @@ Models trained on custom dataset derived from **RWF2000** (Real World Fighting D
 - Contains real-world violence/non-violence scenarios
 - Custom labeling
 - 0.75 mAP on detection task
-- 82.63% accuracy on violence classification
+- 81.25% accuracy on violence classification
 
 Dataset used for testing:
-- Hockey Fight !!! (unable to test, prepare for v3)
-- Movie Fight !!! (unable to test, prepare for v3)
+- Hockey Fight
+- Movie Fight
 - RLVS
 
 ## 📚 References
