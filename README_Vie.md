@@ -4,9 +4,40 @@ Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ tr
 
 ## Hệ thống phát hiện bạo lực với YOLO26 + Bộ phân loại theo thời gian
 
-Phát hiện bạo lực thời gian thực bằng cách kết hợp theo dõi nhiều đối tượng và phân loại theo chuỗi thời gian. Hệ thống phát hiện và khoanh vùng hành vi bạo lực trong video với các khung giới hạn và tỉ lệ xác suất bạo lực cho từng khung hình.
+Real-time violence detection on edge devices
+
+- 50 FPS trên Raspberry Pi 5
+- Độ chính xác 81% trên RWF2000
+- 0.88 ROC-AUC
+- Đánh giá trên nhiều tập dữ liệu khác nhau (RLVS / Hockey / Movies)
+
+## Demo
+
+Xem demo tại đây: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
+
+![Demo](assets/demo.gif)
+
+## Tổng quan
 
 ![System_Pipeline](assets/System_pipeline_VIE.png)
+
+Dự án là một mô hình AI có khả năng phát hiện bạo lực theo thời gian thực và thực thi trên các thiết bị biên chỉ sử dụng CPU
+
+Hệ thông bao gồm việc định vị hành vi bạo lực trong ảnh và phân loại hành vi bạo lực và không bạo lực:
+
+- Mô hình YOLO được sử dụng cho việc xác định khu vực diễn ra hành vi bạo lực
+- Mô hình phân loại hành vi bạo lực dựa trên phân tích chuỗi các khung hình 
+
+Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin cậy và hiệu quả trên các phần cứng hạn chế tài nguyên như Raspberry Pi 5
+
+### Tóm tắt
+
+| Thang đo                      | Thông số   |
+| ----------------------------- | ---------- |
+| **Accuracy**                  | 81.25%     |
+| **ROC–AUC**                   | 0.886      |
+| **FPS(Raspberry Pi 5)**       | 51 FPS     |
+
 
 ### 🎯 Tính năng
 
@@ -101,24 +132,6 @@ các bộ dữ liệu **KHÔNG ĐƯỢC HUẤN LUYỆN** trước đó.
 | **False Positive Rate (FPR)**         | 0.1386  |
 | **False Negative Rate (FNR)**         | 0.3700  |
 | **ROC–AUC**                           | 0.8574  |  
-
-### 🎞 Demo
-
-Xem video demo tại: [`https://youtu.be/Dp1zRq-7fus`](https://youtu.be/Z1gKG_AFHuk)
-
-Hiệu năng (Raspberry Pi)
-
-- FPS trung bình: 47.3
-- Độ trễ mỗi khung hình: 21 ms
-
-Thời gian cho từng bước trong pipeline:
-
-- Phát hiện (Detection):     14.5 ms
-- Theo dõi (Tracking):       1.8 ms
-- Phân loại (Classifier):    0.15 ms
-- Hiển thị (Visualization):  0.33 ms
-
-!THỜI GIAN PHÁT HIỆN LỚN NHẤT: 189ms
 
 ### 🏗️ Kiến trúc
 
