@@ -44,20 +44,17 @@ The goal is to achieve reliable violence detection while maintaining high infere
 
 ## Quickstart / Installation
 ```terminal
-
 git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
 cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
 
 pip install -r requirements.txt
 ```
 
-Download the weights and put inside ViolenceDetector folder
+Download the weights and put inside ViolenceDetector folder. Also remember to add a demo.mp4.
 
 ```terminal
-
 cd ViolenceDetector
 python ViolenceDetection.py
-
 ```
 
 # Performance
