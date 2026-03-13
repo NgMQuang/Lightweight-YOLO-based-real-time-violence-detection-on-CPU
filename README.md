@@ -1,5 +1,8 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
-[![Tiếng Việt](https://img.shields.io/badge/lang-Ti%E1%BA%BFng%20Vi%E1%BB%87t-red)](README_Vie.md)
+<div align="center">
+
+[English](README.md) | [Tiếng Việt](README_Vie.md)
+
+</div>
 
 Note: AI-assisted coding tools were used for minor implementation support
 
