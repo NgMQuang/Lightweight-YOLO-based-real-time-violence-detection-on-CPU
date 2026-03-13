@@ -4,7 +4,12 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 # Violence Detection System with YOLO26 + Temporal Classifier
 
-Real-time violence detection using multi-object tracking and temporal classification. Detects and localizes violent behavior in video with bounding boxes and per-frame violence probability scores. Achieves 81% accuracy on RWF2000 and **50 FPS** on Raspberry Pi 5 with max frame time ~180ms
+Real-time violence detection on edge devices
+
+• 50 FPS on Raspberry Pi 5
+• 81% accuracy on RWF2000
+• 0.88 ROC-AUC
+• Cross-dataset evaluation (RLVS / Hockey / Movies)
 
 ## Demo
 
@@ -29,9 +34,9 @@ The goal is to achieve reliable violence detection while maintaining high infere
 
 | Metric                        | Score   |
 | ----------------------------- | ------- |
-| **Accuracy**                  | ~75-85% |
-| **ROC–AUC**                   | ~85-95% |
-| **FPS(Raspberry Pi 5)**       | ~50 FPS |
+| **Accuracy**                  | 81.25%  |
+| **ROC–AUC**                   | 0.886   |
+| **FPS(Raspberry Pi 5)**       | 51 FPS  |
 
 ## Features
 
@@ -133,6 +138,8 @@ Pipeline timing:
 
 https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
 
+or you can find in releases
+
 ### Configuration
 
 ```python
@@ -185,7 +192,6 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 ### Temporal Classifier (temporal_classifier.onnx + .onnx.data)
 - **Input**: (8, 896, 15) - 8 consecutive feature vectors
 - **Output**: (2) - logit for binary classification [0] for fight and [1] for nofight
-- **Processing**: Conv1d x 3 !!! (Need an analysis here)
 - **Inference Time**: ~1-5ms (CPU)
 
 ## Output
