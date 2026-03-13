@@ -25,8 +25,8 @@ This project presents a lightweight violence detection system designed for real-
 
 The system combines spatial detection and temporal analysis:
 
-• YOLO detects violence in video frames  
-• A temporal classifier analyzes frame sequences to detect violent behavior
+- YOLO localizes potential violence regions
+- A temporal classifier analyzes frame sequences to detect violent behavior
 
 The goal is to achieve reliable violence detection while maintaining high inference speed on low-power hardware such as Raspberry Pi.
 
@@ -153,7 +153,7 @@ or you can find in releases
 FPS_VIDEO = 30                   # Video frame rate, auto read when assign video path
 TOTAL_TIME_DETECT = 2.5          # Detection window (seconds), DO NOT CHANGE
 FRAME_PER_DETECT = 8             # Frames per classifier input, DO NOT CHANGE
-DETECT_INTERVAL = 10             # The code implementation already compute it automatedly
+DETECT_INTERVAL = 10             # Automatically computed by the implementation.
 
 TRACKER = "MEDIANFLOW"           # Tracker type, support MOSSE and KCF
 MAX_TRACKS = 5                   # Max simultaneous tracks, DO NOT CHANGE
