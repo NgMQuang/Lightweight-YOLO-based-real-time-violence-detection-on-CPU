@@ -6,10 +6,10 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 Real-time violence detection on edge devices
 
-• 50 FPS on Raspberry Pi 5
-• 81% accuracy on RWF2000
-• 0.88 ROC-AUC
-• Cross-dataset evaluation (RLVS / Hockey / Movies)
+- 50 FPS on Raspberry Pi 5
+- 81% accuracy on RWF2000
+- 0.88 ROC-AUC
+- Cross-dataset evaluation (RLVS / Hockey / Movies)
 
 ## Demo
 
@@ -55,7 +55,14 @@ cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
 pip install -r requirements.txt
 ```
 
-Download the weights and put inside ViolenceDetector folder. Also remember to add a demo.mp4.
+Download weights and place them inside:
+
+ViolenceDetector/
+ ├── violence_yolo.onnx
+ ├── temporal_classifier.onnx
+ ├── demo.mp4
+ 
+ Also remember to add a demo.mp4.
 
 ```terminal
 cd ViolenceDetector
