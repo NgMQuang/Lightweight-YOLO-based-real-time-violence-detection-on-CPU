@@ -92,51 +92,29 @@ python ViolenceDetection.py
 To evaluate generalization ability, the model was tested on
 other datasets **WITHOUT TRAINING** on these datasets.
 
+| Metric                        | RLVS   | HKF    | Movies |
+| ----------------------------- | ------ | ------ | ------ |
+| **Accuracy**                  | 0.7655 | 0.8090 | 0.7463 |
+| **Precision**                 | 0.7010 | 0.7388 | 0.8182 |
+| **Recall**                    | 0.9260 | 0.9560 | 0.6300 |
+| **F1 Score**                  | 0.7979 | 0.6620 | 0.7119 |
+| **Specificity**               | 0.6050 | 0.7900 | 0.8614 |
+| **False Positive Rate (FPR)** | 0.3950 | 0.3380 | 0.1386 |
+| **False Negative Rate (FNR)** | 0.0740 | 0.0440 | 0.3700 |
+| **ROC–AUC**                   | 0.9037 | 0.9247 | 0.8574 |
+
+
 **Real life violence Situation(Full)**
 
 ![RLVS](assets/RLVS.png)
-
-| Metric                        | Score  |
-| ----------------------------- | ------ |
-| **Accuracy**                  | 0.7655 |
-| **Precision**                 | 0.7010 |
-| **Recall**                    | 0.9260 |
-| **F1 Score**                  | 0.7979 |
-| **Specificity**               | 0.6050 |
-| **False Positive Rate (FPR)** | 0.3950 |
-| **False Negative Rate (FNR)** | 0.0740 |
-| **ROC–AUC**                   | 0.9037 |
-
 
 **HockeyFight(Full)**
 
 ![HKF](assets/HKF.png)
 
-| Metric                        | Score  |
-| ----------------------------- | ------ |
-| **Accuracy**                  | 0.8090 |
-| **Precision**                 | 0.7388 |
-| **Recall**                    | 0.9560 |
-| **F1 Score**                  | 0.6620 |
-| **Specificity**               | 0.7900 |
-| **False Positive Rate (FPR)** | 0.3380 |
-| **False Negative Rate (FNR)** | 0.0440 |
-| **ROC–AUC**                   | 0.9247 |  
-
 **MovieFight(Full)**
 
-![MV](assets/Peliculas.png)
-
-| Metric                        | Score  |
-| ----------------------------- | ------ |
-| **Accuracy**                  | 0.7463 |
-| **Precision**                 | 0.8182 |
-| **Recall**                    | 0.6300 |
-| **F1 Score**                  | 0.7119 |
-| **Specificity**               | 0.8614 |
-| **False Positive Rate (FPR)** | 0.1386 |
-| **False Negative Rate (FNR)** | 0.3700 |
-| **ROC–AUC**                   | 0.8574 |     
+![MV](assets/Peliculas.png)   
 
 Performance (Raspberry Pi 5 CPU)
 
