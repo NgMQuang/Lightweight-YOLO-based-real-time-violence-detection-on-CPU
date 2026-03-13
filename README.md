@@ -60,7 +60,9 @@ python ViolenceDetection.py
 
 ```
 
-## Performance
+# Performance
+
+## Training and Evaluation
 
 **RWF2000(Val only)**
 
@@ -116,7 +118,7 @@ other datasets **WITHOUT TRAINING** on these datasets.
 
 ![MV](assets/Peliculas.png)   
 
-Performance (Raspberry Pi 5 CPU)
+## Raspberry Pi 5 Implementation
 
 Average FPS: 51.74
 
