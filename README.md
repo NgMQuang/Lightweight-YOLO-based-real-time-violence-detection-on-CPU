@@ -38,9 +38,9 @@ The system combines spatial detection and temporal analysis:
 
 The goal is to achieve reliable violence detection while maintaining high inference speed on low-power hardware such as Raspberry Pi.
 
-### Quick review
-
 <div align="center">
+
+### Quick review
 
 | Metric                        | Score   |
 | ----------------------------- | ------- |
