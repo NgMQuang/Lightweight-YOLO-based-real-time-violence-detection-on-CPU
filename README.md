@@ -103,8 +103,7 @@ python ViolenceDetection.py
 
 ## Testing
 
-To evaluate generalization ability, the model was tested on
-other datasets **WITHOUT TRAINING** on these datasets.
+To evaluate generalization ability, the model was tested on other datasets **without training on them**.
 
 | Metric                        | RLVS   | HKF    | Movies |
 | ----------------------------- | ------ | ------ | ------ |
@@ -201,7 +200,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 
 ### Temporal Classifier (temporal_classifier.onnx + .onnx.data)
 - **Input**: (8, 896, 15) - 8 consecutive feature vectors
-- **Output**: (2) - logit for binary classification [1] for fight and [0] for nofight
+- **Output**: (2) - logit for binary classification [1] for fight and [0] for non-fight
 - **Inference Time**: ~1-5ms (CPU)
 
 ## Output
