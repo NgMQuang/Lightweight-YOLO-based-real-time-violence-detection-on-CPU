@@ -8,7 +8,7 @@ Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ tr
 
 </div>
 
-Real-time violence detection on edge devices
+Hệ thống phát hiện bạo lực thời gian thực trên các thiết bị biên
 
 - 50 FPS trên Raspberry Pi 5
 - Độ chính xác 81% trên RWF2000
