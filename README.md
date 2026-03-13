@@ -84,9 +84,9 @@ cd ViolenceDetector
 python ViolenceDetection.py
 ```
 
-# Performance
+## Performance
 
-## Training and Evaluation
+### Training and Evaluation
 
 <div align="center">
 
@@ -117,7 +117,7 @@ python ViolenceDetection.py
 |----------|------|------------|----------------------------------------------|
 |all       |3000  |    2865    |  0.712   -   0.704   -  0.754  -       0.425 |
 
-## Testing
+### Testing
 
 To evaluate generalization ability, the model was tested on other datasets **WITHOUT TRAINING ON THEM**.
 
@@ -152,7 +152,7 @@ To evaluate generalization ability, the model was tested on other datasets **WIT
 
 </div>
 
-## Raspberry Pi 5 Implementation
+### Raspberry Pi 5 Implementation
 
 Average FPS: 51.74
 
