@@ -108,7 +108,7 @@ python ViolenceDetection.py
 Để đánh giá khả năng khái quát hóa, mô hình được kiểm thử trên
 các bộ dữ liệu mà **KHÔNG ĐƯỢC HUẤN LUYỆN TRÊN ĐÓ'
 
-| Metric                        | RLVS   | HKF    | Movies |
+| Thang đo                      | RLVS   | HKF    | Movies |
 | ----------------------------- | ------ | ------ | ------ |
 | **Accuracy**                  | 0.7655 | 0.8090 | 0.7463 |
 | **Precision**                 | 0.7010 | 0.7388 | 0.8182 |
