@@ -58,8 +58,11 @@ pip install -r requirements.txt
 Download weights and place them inside:
 
 ViolenceDetector/
+
  ├── violence_yolo.onnx
+ 
  ├── temporal_classifier.onnx
+ 
  ├── demo.mp4
  
  Also remember to add a demo.mp4.
