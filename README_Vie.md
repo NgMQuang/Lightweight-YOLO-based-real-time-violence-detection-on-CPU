@@ -1,4 +1,8 @@
+<div align="center">
+
 [English](README.md) | [Tiếng Việt](README_Vie.md)
+
+</div>
 
 Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ trợ một phần nhỏ trong quá trình triển khai.
 
