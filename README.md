@@ -40,11 +40,15 @@ The goal is to achieve reliable violence detection while maintaining high infere
 
 ### Quick review
 
+<div align="center">
+
 | Metric                        | Score   |
 | ----------------------------- | ------- |
 | **Accuracy**                  | 81.25%  |
 | **ROC–AUC**                   | 0.886   |
 | **FPS(Raspberry Pi 5)**       | 51 FPS  |
+
+</div>
 
 ## Features
 
