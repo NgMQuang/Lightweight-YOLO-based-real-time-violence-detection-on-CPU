@@ -42,7 +42,7 @@ The goal is to achieve reliable violence detection while maintaining high infere
 - **Real-time Performance**: Optimized for CPU and GPU inference
 - **Adaptive Frame Sampling**: Configurable detection intervals for resource efficiency
 
-## Installation
+## Quickstart / Installation
 ```terminal
 
 git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
