@@ -48,13 +48,39 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 - **Hiệu năng thời gian thực**: Tối ưu cho suy luận trên CPU và GPU
 - **Lấy mẫu khung hình tương thích**: Cấu hình được khoảng cách giữa các lần phát hiện để tiết kiệm tài nguyên
 
+## Cài đặt
+
+```terminal
+git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+
+pip install -r requirements.txt
+```
+
+Tải các trọng số (weights) và sắp xếp như dưới:
+
+```text
+ViolenceDetector/
+├── violence_yolo.onnx
+├── temporal_classifier.onnx
+├── temporal_classifier.onnx.data
+└── demo.mp4
+```
+ 
+Xin vui lòng chuẩn bị trước một video demo.mp4
+
+```terminal
+cd ViolenceDetector
+python ViolenceDetection.py
+```
+
 ### Hiệu năng
+
+## Huấn luyện và đánh giá
 
 **RWF2000 (chỉ tập Val)**
 
-![CM_RWF_val](assets/RWF_val_confusion_matrix.png)
-![ROC_RWF_val](assets/RWF_val_roc_curve.png)
-![ROC_RWF_val](assets/RWF_val_threshold_analysis.png)
+![RWF_val](assets/RWF.png)
 
 **Chỉ số huấn luyện**
 
@@ -80,77 +106,52 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 ### Kiểm thử
 
 Để đánh giá khả năng khái quát hóa, mô hình được kiểm thử trên
-các bộ dữ liệu **KHÔNG ĐƯỢC HUẤN LUYỆN** trước đó.
+các bộ dữ liệu mà **KHÔNG ĐƯỢC HUẤN LUYỆN TRÊN ĐÓ'
+
+| Metric                        | RLVS   | HKF    | Movies |
+| ----------------------------- | ------ | ------ | ------ |
+| **Accuracy**                  | 0.7655 | 0.8090 | 0.7463 |
+| **Precision**                 | 0.7010 | 0.7388 | 0.8182 |
+| **Recall**                    | 0.9260 | 0.9560 | 0.6300 |
+| **F1 Score**                  | 0.7979 | 0.6620 | 0.7119 |
+| **Specificity**               | 0.6050 | 0.7900 | 0.8614 |
+| **False Positive Rate (FPR)** | 0.3950 | 0.3380 | 0.1386 |
+| **False Negative Rate (FNR)** | 0.0740 | 0.0440 | 0.3700 |
+| **ROC–AUC**                   | 0.9037 | 0.9247 | 0.8574 |
 
 **Real Life Violence Situation (Toàn bộ)**
 
-![CM_RLVS](assets/RLVS_confusion_matrix.png)
-![ROC_RLVS](assets/RLVS_roc_curve.png)
-![Threshold_RLVS](assets/RLVS_threshold_analysis.png)
-
-| Chỉ số                        | Giá trị |
-| ----------------------------- | ------- |
-| **Accuracy (Độ chính xác)**  | 0.7655  |
-| **Precision (Độ chính xác dương)** | 0.7010  |
-| **Recall (Độ bao phủ)**      | 0.9260  |
-| **F1 Score**                 | 0.7979  |
-| **Specificity (Độ đặc hiệu)** | 0.6050 |
-| **False Positive Rate (FPR)** | 0.3950 |
-| **False Negative Rate (FNR)** | 0.0740 |
-| **ROC–AUC**                  | 0.9037  |
+![RLVS](assets/RLVS.png)
 
 **HockeyFight (Toàn bộ)**
 
-![CM_HKF](assets/hkfval_confusion_matrix.png)
-![ROC_HKF](assets/hkfval_roc_curve.png)
-![Threshold_HKF](assets/hkfval_threshold_analysis.png)
-
-| Chỉ số                        | Giá trị |
-| ----------------------------- | ------- |
-| **Accuracy (Độ chính xác)**  | 0.8090  |
-| **Precision (Độ chính xác dương)** | 0.7388  |
-| **Recall (Độ bao phủ)**      | 0.9560  |
-| **F1 Score**                 | 0.6620  |
-| **Specificity (Độ đặc hiệu)** | 0.7900 |
-| **False Positive Rate (FPR)** | 0.3380 |
-| **False Negative Rate (FNR)** | 0.0440 |
-| **ROC–AUC**                  | 0.9247  |  
+![HKF](assets/HKF.png)
 
 **MovieFight (Toàn bộ)**
 
-![CM_MV](assets/Peliculas_confusion_matrix.png)
-![ROC_MV](assets/Peliculas_roc_curve.png)
-![Threshold_MV](assets/Peliculas_threshold_analysis.png)
+![MV](assets/Peliculas.png)   
 
-| Chỉ số                                | Giá trị |
-| -----------------------------         | ------- |
-| **Accuracy (Độ chính xác)**           | 0.7463  |
-| **Precision (Độ chính xác dương)**    | 0.8182  |
-| **Recall (Độ bao phủ)**               | 0.6300  |
-| **F1 Score**                          | 0.7119  |
-| **Specificity (Độ đặc hiệu)**         | 0.8614  |
-| **False Positive Rate (FPR)**         | 0.1386  |
-| **False Negative Rate (FNR)**         | 0.3700  |
-| **ROC–AUC**                           | 0.8574  |  
+## Hiện thực trên Raspberry Pi 5
 
-### 🏗️ Kiến trúc
+FPS trung bình: 51.74
 
-```text
-Khung hình video
-    ↓
-[YOLO Detection] → Hộp giới hạn + Độ tin cậy -> [Tracker] → Theo dõi đối tượng qua các khung hình
-    ↓
-[Trích xuất đặc trưng không gian] → vector đặc trưng kích thước 896 × 15
-    ↓
-[Bộ phân loại theo thời gian] → Xác suất bạo lực (cửa sổ 8 khung hình)
-    ↓
-Đầu ra: Khung hình được gắn nhãn với hộp và điểm bạo lực
-```
+Thời gian chạy hệ thống:
+
+|Nhiệm vụ      | Trung bình(ms) | Ngắn nhất(ms) | Dài nhất(ms) |
+|--------------|----------------|---------------|--------------|
+|Phát hiện     | 10.426         | 0.000         | 165.764      |
+|Theo dõi      | 2.118          | 0.000         | 14.342       |
+|Phân loại     | 0.542          | 0.000         | 15.600       |
+|Hiển thị      | 0.683          | 0.284         | 43.064       |
+|Tổng thể      | 19.327         | 4.006         | 171.141      |
 
 ### Trọng số (Weights)
 
 Liên kết tải trọng số mô hình:
-`https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link`
+
+https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
+
+Hoặc có thể tìm kiếm trong releases
 
 ### Cấu hình
 
@@ -209,11 +210,10 @@ TRACKER_FAILURE_DECAY = 0.5      # Tốc độ suy giảm độ tin cậy khi tr
 #### Bộ phân loại theo thời gian (`temporal_classifier.onnx` + `.onnx.data`)
 
 - **Input**: (8, 896, 15) - 8 vector đặc trưng liên tiếp
-- **Output**: (2) - logit cho bài toán phân lớp nhị phân: [0] là "fight", [1] là "nofight"
-- **Xử lý**: 3 lớp mạng tích chập 1 chiều liên tiếp (cần phân tích chi tiết thêm)
+- **Output**: (2) - logit cho bài toán phân lớp nhị phân: [1] là "fight", [0] là "nofight"
 - **Thời gian suy luận**: ~1–5ms (CPU)
 
-### 🎮 Đầu ra
+### Đầu ra
 
 Script sẽ hiển thị:
 
@@ -223,14 +223,14 @@ Script sẽ hiển thị:
 - **Xác suất bạo lực** khi được phân loại
 - **Cảnh báo** khi độ tin cậy bạo lực > 0.8
 
-### 🔬 Bộ dữ liệu
+### Bộ dữ liệu
 
 Các mô hình được huấn luyện trên bộ dữ liệu tùy chỉnh dựa trên **RWF2000** (Real World Fighting Dataset):
 
 - Chứa các tình huống bạo lực/không bạo lực trong thế giới thực
 - Gán nhãn tùy chỉnh
 - Đạt 0.75 mAP ở bài toán phát hiện
-- 82.63% độ chính xác ở bài toán phân loại bạo lực
+- 81.25% độ chính xác ở bài toán phân loại bạo lực
 
 Bộ dữ liệu dùng để kiểm thử:
 
@@ -238,7 +238,12 @@ Bộ dữ liệu dùng để kiểm thử:
 - Movie Fight
 - RLVS
 
-### 📚 Tài liệu tham khảo
+## Hướng phát triển
+
+- Cải thiện trích xuất đặc trưng không gian
+- Tối ưu thêm cho các hệ thống nhúng
+
+### Tài liệu tham khảo
 
 - YOLO26: `https://github.com/ultralytics/ultralytics`
 - ONNX Runtime: `https://onnxruntime.ai/`
@@ -246,9 +251,9 @@ Bộ dữ liệu dùng để kiểm thử:
 
 ### 📄 Giấy phép
 
-MIT
+MIT License
 
-### 🙏 Lời cảm ơn
+### Lời cảm ơn
 
 - YOLO26 bởi Ultralytics
 - Nhóm xây dựng bộ dữ liệu RWF2000
