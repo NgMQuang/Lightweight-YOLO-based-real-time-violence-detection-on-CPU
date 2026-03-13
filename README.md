@@ -61,6 +61,7 @@ Download weights and place them inside:
 ViolenceDetector/
 ├── violence_yolo.onnx
 ├── temporal_classifier.onnx
+├── temporal_classifier.onnx.data
 └── demo.mp4
 ```
  
