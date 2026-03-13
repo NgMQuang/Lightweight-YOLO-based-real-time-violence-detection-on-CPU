@@ -90,8 +90,8 @@ class ViolenceDetector:
             self.download_file(YOLO_URL, yolo_model)
         if not os.path.exists(temporalhead):
             print("Downloading model files (first run only)...")
-            temporal_model = "temporal_classifier.onnx"
-            temporal_data  = "temporal_classifier.onnx.data"
+            temporal_model = temporalhead
+            temporal_data  = temporalhead + ".data"
             
             self.download_file(CLAM_URL, temporal_model)
             self.download_file(CLAD_URL, temporal_data)
@@ -530,3 +530,4 @@ if __name__ == "__main__":
     detector = ViolenceDetector(video_path)
 
     detector.run()
+
