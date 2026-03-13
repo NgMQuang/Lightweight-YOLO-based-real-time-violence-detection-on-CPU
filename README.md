@@ -57,7 +57,7 @@ The goal is to achieve reliable violence detection while maintaining high infere
 - **Temporal Classification**: Temporal classifier on 8-frame feature sequences
 - **Robust Tracking**: Automatic tracker failure recovery and confidence decay
 - **Real-time Performance**: Optimized for CPU and GPU inference
-- **Adaptive Frame Sampling**: Configurable detection intervals for resource efficiency
+- **Adaptive Frame Sampling**: Configurable detection intervals for efficiency
 
 ## Quickstart / Installation
 ```terminal
