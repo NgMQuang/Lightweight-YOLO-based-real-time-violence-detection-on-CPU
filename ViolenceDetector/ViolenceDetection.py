@@ -5,6 +5,8 @@ from utilities import *
 import logging
 from collections import deque
 import time
+import urllib.request
+import os
 
 #System parameters
 TOTAL_TIME_DETECT = 2.5 #1.64 for HKF and Movies    # Detection window duration (seconds)
@@ -16,6 +18,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+YOLO_URL = "https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU/releases/download/v2/violence_yolo.onnx"
+CLAM_URL = "https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU/releases/download/v2/temporal_classifier.onnx"
+CLAD_URL = "https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU/releases/download/v2/temporal_classifier.onnx.data"
 
 class ViolenceDetector:
     def __init__(self, video_path, yolo_model = 'violence_yolo.onnx', temporalhead = 'temporal_classifier.onnx', tracker='MEDIANFLOW', **kwargs):
@@ -64,6 +70,12 @@ class ViolenceDetector:
         self.tracks    = []
         self.feats     = deque(maxlen=FRAME_PER_DETECT)  # store last N features for classifier input
 
+    def download_file(self, url, path):
+        if not os.path.exists(path):
+            print(f"Downloading {os.path.basename(path)}...")
+            urllib.request.urlretrieve(url, path)
+            print("Download complete!")
+
     # Load ONNX model
     def load_onnx_models(self, yolo_model, temporalhead)->tuple[ort.InferenceSession, ort.InferenceSession]:
         """Load ONNX models with proper error handling."""
@@ -71,6 +83,18 @@ class ViolenceDetector:
             'yolo': yolo_model,
             'gap': temporalhead
         }
+
+        # auto download if missing
+        if not os.path.exists(yolo_model):
+            print("Downloading model files (first run only)...")
+            self.download_file(YOLO_URL, yolo_model)
+        if not os.path.exists(temporalhead):
+            print("Downloading model files (first run only)...")
+            temporal_model = "temporal_classifier.onnx"
+            temporal_data  = "temporal_classifier.onnx.data"
+            
+            self.download_file(CLAM_URL, temporal_model)
+            self.download_file(CLAD_URL, temporal_data)
         
         try:
             yolo_session = ort.InferenceSession(
@@ -504,4 +528,5 @@ class ViolenceDetector:
 if __name__ == "__main__":
     video_path = "demo.mp4"  # Set to None or "0" for webcam
     detector = ViolenceDetector(video_path)
+
     detector.run()
