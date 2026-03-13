@@ -25,6 +25,15 @@ The system combines spatial detection and temporal analysis:
 
 The goal is to achieve reliable violence detection while maintaining high inference speed on low-power hardware such as Raspberry Pi.
 
+# Quick review
+
+| Metric                        | Score   |
+| ----------------------------- | ------- |
+| **Accuracy**                  | ~75-85% |
+| **ROC–AUC**                   | ~85-95% |
+| **FPS(Raspberry Pi 5)**       | ~50 FPS |
+
+
 
 ## 🎯 Features
 
