@@ -17,7 +17,7 @@ Real-time violence detection on edge devices
 
 ## Demo
 
-Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
+Watch demo here: [https://youtu.be/Z1gKG_AFHuk](https://youtu.be/Z1gKG_AFHuk)
 
 ![Demo](assets/demo.gif)
 
