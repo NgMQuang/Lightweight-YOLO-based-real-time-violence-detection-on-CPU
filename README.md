@@ -88,9 +88,13 @@ python ViolenceDetection.py
 
 ## Training and Evaluation
 
+<div align="center">
+
 **RWF2000(Val only)**
 
 ![RWF_val](assets/RWF.png)
+
+</div>
 
 **Training metrics**
 
@@ -128,6 +132,7 @@ To evaluate generalization ability, the model was tested on other datasets **WIT
 | **False Negative Rate (FNR)** | 0.0740 | 0.0440 | 0.3700 |
 | **ROC–AUC**                   | 0.9037 | 0.9247 | 0.8574 |
 
+<div align="center">
 
 **Real life violence Situation(Full)**
 
@@ -140,6 +145,8 @@ To evaluate generalization ability, the model was tested on other datasets **WIT
 **MovieFight(Full)**
 
 ![MV](assets/Peliculas.png)   
+
+</div>
 
 ## Raspberry Pi 5 Implementation
 
