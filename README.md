@@ -103,7 +103,7 @@ python ViolenceDetection.py
 
 ## Testing
 
-To evaluate generalization ability, the model was tested on other datasets **without training on them**.
+To evaluate generalization ability, the model was tested on other datasets **WITHOUT TRAINING ON THEM**.
 
 | Metric                        | RLVS   | HKF    | Movies |
 | ----------------------------- | ------ | ------ | ------ |
