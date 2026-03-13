@@ -6,6 +6,10 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 Real-time violence detection using multi-object tracking and temporal classification. Detects and localizes violent behavior in video with bounding boxes and per-frame violence probability scores. Achieves 81% accuracy on RWF2000 and **50 FPS** on Raspberry Pi 5 with max frame time ~180ms
 
+## 🎞 Demo
+
+Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
+
 ![System_Pipeline](assets/System_pipeline.png)
 
 ## Overview
@@ -106,10 +110,6 @@ other datasets **WITHOUT TRAINING** on these datasets.
 | **False Positive Rate (FPR)** | 0.1386 |
 | **False Negative Rate (FNR)** | 0.3700 |
 | **ROC–AUC**                   | 0.8574 |     
-
-## 🎞 Demo
-
-Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
 Performance (Raspberry Pi 5 CPU)
 
