@@ -10,9 +10,11 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
-![System_Pipeline](assets/System_pipeline.png)
+![Demo](assets/System_pipeline.png)
 
 ## Overview
+
+![System_Pipeline](assets/System_pipeline.png)
 
 This project presents a lightweight violence detection system designed for real-time deployment on CPU-based edge devices.
 
