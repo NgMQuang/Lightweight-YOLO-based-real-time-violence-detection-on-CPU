@@ -39,7 +39,7 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 | **FPS(Raspberry Pi 5)**       | 51 FPS     |
 
 
-### 🎯 Tính năng
+### Tính năng
 
 - **Phát hiện không gian (Spatial Detection)**: YOLO26 cho phép phát hiện và định vị đối tượng theo thời gian thực
 - **Theo dõi đa đối tượng (Multi-Object Tracking)**: Bộ theo dõi độ trễ dựa trên độ tin cậy (confidence-based hysteresis)
@@ -48,7 +48,7 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 - **Hiệu năng thời gian thực**: Tối ưu cho suy luận trên CPU và GPU
 - **Lấy mẫu khung hình tương thích**: Cấu hình được khoảng cách giữa các lần phát hiện để tiết kiệm tài nguyên
 
-### 📊 Hiệu năng
+### Hiệu năng
 
 **RWF2000 (chỉ tập Val)**
 
@@ -62,7 +62,7 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 
 | Chỉ số                        | Giá trị |
 | ----------------------------- | ------- |
-| **Accuracy (Độ chính xác)**  | 0.8125  |
+| **Accuracy (Độ chính xác)**   | 0.8125  |
 | **Precision (Độ chính xác dương)** | 0.7990  |
 | **Recall (Độ bao phủ)**      | 0.8350  |
 | **F1 Score**                 | 0.8166  |
