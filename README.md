@@ -2,11 +2,11 @@
 
 [English](README.md) | [Tiếng Việt](README_Vie.md)
 
-</div>
-
 Note: AI-assisted coding tools were used for minor implementation support
 
 # Violence Detection System with YOLO26 + Temporal Classifier
+
+</div>
 
 Real-time violence detection on edge devices
 
