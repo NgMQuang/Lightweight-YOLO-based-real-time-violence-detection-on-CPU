@@ -77,7 +77,7 @@ ViolenceDetector/
 └── demo.mp4
 ```
  
- Also remember to add a demo.mp4.
+Also place a demo.mp4 file in the folder for testing.
 
 ```terminal
 cd ViolenceDetector
@@ -134,7 +134,7 @@ To evaluate generalization ability, the model was tested on other datasets **WIT
 
 <div align="center">
 
-**Real life violence Situation(Full)**
+**Real-Life Violence Situation (Full)**
 
 ![RLVS](assets/RLVS.png)
 
