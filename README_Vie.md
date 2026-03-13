@@ -2,11 +2,11 @@
 
 [English](README.md) | [Tiếng Việt](README_Vie.md)
 
-</div>
-
 Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ trợ một phần nhỏ trong quá trình triển khai.
 
 ## Hệ thống phát hiện bạo lực với YOLO26 + Bộ phân loại theo thời gian
+
+</div>
 
 Real-time violence detection on edge devices
 
@@ -19,7 +19,11 @@ Real-time violence detection on edge devices
 
 Xem demo tại đây: [https://youtu.be/Z1gKG_AFHuk](https://youtu.be/Z1gKG_AFHuk)
 
+<div align="center">
+
 ![Demo](assets/demo.gif)
+
+</div>
 
 ## Tổng quan
 
@@ -34,6 +38,8 @@ Hệ thông bao gồm việc định vị hành vi bạo lực trong ảnh và p
 
 Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin cậy và hiệu quả trên các phần cứng hạn chế tài nguyên như Raspberry Pi 5
 
+<div align="center">
+
 ### Tóm tắt
 
 | Thang đo                      | Thông số   |
@@ -42,6 +48,7 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 | **ROC–AUC**                   | 0.886      |
 | **FPS(Raspberry Pi 5)**       | 51 FPS     |
 
+</div>
 
 ### Tính năng
 
@@ -82,9 +89,13 @@ python ViolenceDetection.py
 
 ## Huấn luyện và đánh giá
 
+<div align="center">
+
 **RWF2000 (chỉ tập Val)**
 
 ![RWF_val](assets/RWF.png)
+
+</div>
 
 **Chỉ số huấn luyện**
 
@@ -123,17 +134,25 @@ các bộ dữ liệu mà **KHÔNG ĐƯỢC HUẤN LUYỆN TRÊN ĐÓ'
 | **False Negative Rate (FNR)** | 0.0740 | 0.0440 | 0.3700 |
 | **ROC–AUC**                   | 0.9037 | 0.9247 | 0.8574 |
 
+<div align="center">
+
 **Real Life Violence Situation (Toàn bộ)**
 
 ![RLVS](assets/RLVS.png)
+
+--------------------------------------
 
 **HockeyFight (Toàn bộ)**
 
 ![HKF](assets/HKF.png)
 
+--------------------------------------
+
 **MovieFight (Toàn bộ)**
 
 ![MV](assets/Peliculas.png)   
+
+</div>
 
 ## Hiện thực trên Raspberry Pi 5
 
