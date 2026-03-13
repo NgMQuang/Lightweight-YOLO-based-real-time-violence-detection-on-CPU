@@ -57,7 +57,7 @@ Mục tiêu của dự án là phát triển mô hình bạo lực đáng tin c�
 - **Phân loại theo thời gian (Temporal Classification)**: Bộ phân loại theo chuỗi thời gian trên chuỗi 8 khung hình đặc trưng (feature sequences)
 - **Theo dõi ổn định**: Tự động khôi phục khi bộ theo dõi thất bại và suy giảm độ tin cậy theo thời gian
 - **Hiệu năng thời gian thực**: Tối ưu cho suy luận trên CPU và GPU
-- **Lấy mẫu khung hình tương thích**: Cấu hình được khoảng cách giữa các lần phát hiện để tiết kiệm tài nguyên
+- **Lấy mẫu khung hình tương thích**: Cấu hình được khoảng cách giữa các lần phát hiện để đảm bảo hiệu quả
 
 ## Cài đặt
 
