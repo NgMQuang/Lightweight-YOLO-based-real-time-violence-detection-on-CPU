@@ -10,7 +10,7 @@ Real-time violence detection using multi-object tracking and temporal classifica
 
 Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
-![Demo](assets/System_pipeline.png)
+![Demo](demo.gif)
 
 ## Overview
 
