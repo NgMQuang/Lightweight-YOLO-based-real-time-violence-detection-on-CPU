@@ -198,7 +198,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 
 ### Temporal Classifier (temporal_classifier.onnx + .onnx.data)
 - **Input**: (8, 896, 15) - 8 consecutive feature vectors
-- **Output**: (2) - logit for binary classification [0] for fight and [1] for nofight
+- **Output**: (2) - logit for binary classification [1] for fight and [0] for nofight
 - **Inference Time**: ~1-5ms (CPU)
 
 ## Output
