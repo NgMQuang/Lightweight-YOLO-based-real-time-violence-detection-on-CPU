@@ -5,7 +5,7 @@
 Lưu ý: Các công cụ lập trình AI đã được sử dụng để hỗ trợ một phần nhỏ trong quá trình triển khai.
 
 # Hệ thống phát hiện bạo lực với YOLO26 và
-# Bộ phân loại theo thời gian
+Bộ phân loại theo thời gian
 
 </div>
 
