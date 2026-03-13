@@ -138,13 +138,13 @@ To evaluate generalization ability, the model was tested on other datasets **WIT
 
 ![RLVS](assets/RLVS.png)
 
-
+-----------------------------------------------------------
 
 **HockeyFight(Full)**
 
 ![HKF](assets/HKF.png)
 
-
+-----------------------------------------------------------
 
 **MovieFight(Full)**
 
