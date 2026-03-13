@@ -6,7 +6,7 @@ Note: AI-assisted coding tools were used for minor implementation support
 
 Real-time violence detection using multi-object tracking and temporal classification. Detects and localizes violent behavior in video with bounding boxes and per-frame violence probability scores. Achieves 81% accuracy on RWF2000 and **50 FPS** on Raspberry Pi 5 with max frame time ~180ms
 
-## 🎞 Demo
+## Demo
 
 Watch demo here: [https://youtu.be/Dp1zRq-7fus](https://youtu.be/Z1gKG_AFHuk)
 
@@ -33,9 +33,7 @@ The goal is to achieve reliable violence detection while maintaining high infere
 | **ROC–AUC**                   | ~85-95% |
 | **FPS(Raspberry Pi 5)**       | ~50 FPS |
 
-
-
-## 🎯 Features
+## Features
 
 - **Spatial Detection**: YOLO26 for real-time object detection and localization
 - **Multi-Object Tracking**: Tracker with confidence-based hysteresis
@@ -44,7 +42,25 @@ The goal is to achieve reliable violence detection while maintaining high infere
 - **Real-time Performance**: Optimized for CPU and GPU inference
 - **Adaptive Frame Sampling**: Configurable detection intervals for resource efficiency
 
-## 📊 Performance
+## Installation
+```terminal
+
+git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
+
+pip install -r requirements.txt
+```
+
+Download the weights and put inside ViolenceDetector folder
+
+```terminal
+
+cd ViolenceDetector
+python ViolenceDetection.py
+
+```
+
+## Performance
 
 **RWF2000(Val only)**
 
@@ -140,23 +156,6 @@ Pipeline timing:
 
 https://drive.google.com/drive/folders/10E4KqX_fWGagm4lv79oJ9eFl63tIdKg7?usp=drive_link
 
-## Installation
-```terminal
-
-git clone https://github.com/NgMQuang/Lightweight-YOLO-based-real-time-violence-detection-on-CPU
-cd Lightweight-YOLO-based-real-time-violence-detection-on-CPU
-
-pip install -r requirements.txt
-```
-
-Download the weights and put inside ViolenceDetector folder
-
-```terminal
-
-cd ViolenceDetector
-python ViolenceDetection.py
-
-```
 ### Configuration
 
 ```python
@@ -174,7 +173,7 @@ alpha = 0.8                      # EMA smoothing factor
 TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 ```
 
-## 🔍 How It Works
+## How It Works
 
 ### 1. Detection Phase (Every N frames)
 - YOLO detects suspicious areas
@@ -197,7 +196,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 - Color-coded bounding boxes with track IDs
 - Violence probability displayed on frame
 
-## 📊 Model Details
+## Model Details
 
 ### YOLO26 (violence_yolo.onnx)
 - **Input**: 256×320 RGB images (normalized 0-1)
@@ -212,7 +211,7 @@ TRACKER_FAILURE_DECAY = 0.5      # Confidence decay on failure
 - **Processing**: Conv1d x 3 !!! (Need an analysis here)
 - **Inference Time**: ~1-5ms (CPU)
 
-## 🎮 Output
+## Output
 
 The script displays:
 - **Bounding boxes** around detected people
@@ -221,7 +220,7 @@ The script displays:
 - **Violence probability** when classified
 - **Alert** when violence confidence > 0.8
 
-## 🔬 Dataset
+## Dataset
 
 Models trained on custom dataset derived from **RWF2000** (Real World Fighting Dataset):
 - Contains real-world violence/non-violence scenarios
@@ -239,17 +238,17 @@ Dataset used for testing:
 - Improve spatial feature extraction
 - Optimize for embedded deployment
 
-## 📚 References
+## References
 
 - YOLO26: https://github.com/ultralytics/ultralytics
 - ONNX Runtime: https://onnxruntime.ai/
 - RWF2000 Dataset: https://github.com/mchengny/RWF2000-Video-Database-for-Violence-Detection
 
-## 📄 License
+## License
 
-MIT
+MIT License
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - YOLO26 by Ultralytics
 - RWF2000 dataset creators
