@@ -85,9 +85,9 @@ cd ViolenceDetector
 python ViolenceDetection.py
 ```
 
-### Hiệu năng
+## Hiệu năng
 
-## Huấn luyện và đánh giá
+### Huấn luyện và đánh giá
 
 <div align="center">
 
@@ -154,7 +154,7 @@ các bộ dữ liệu mà **KHÔNG ĐƯỢC HUẤN LUYỆN TRÊN ĐÓ'
 
 </div>
 
-## Hiện thực trên Raspberry Pi 5
+### Hiện thực trên Raspberry Pi 5
 
 FPS trung bình: 51.74
 
