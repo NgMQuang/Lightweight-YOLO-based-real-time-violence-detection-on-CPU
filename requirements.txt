@@ -1,4 +1,4 @@
 onnxruntime
-cv2
+opencv-contrib-python
 numpy
 logging
