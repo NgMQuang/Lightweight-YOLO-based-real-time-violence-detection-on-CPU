@@ -4,7 +4,7 @@ Note:
 
 Training data: All from RWF-2000 train dataset, which cut for meaningful interactions for Fights slit uniformly for NonFights' videos. Total there about ~12000 images for training and ~3000 images for validating for YOLO (No testing cause not my problem), 1503 videos to train and 398 to validate. The RWF validating folder is kept for testing.
 
-The YOLO training code is in violence_yolo.ipynb, the temporal classifier training is lost, but you can find the architecture in TemporalClassifier.ipynb
+The YOLO training code is in YOLO_attention.ipynb, the spatial architecture is in violence_yolo.ipynb, the temporal classifier training is lost, but you can find the architecture in TemporalClassifier.ipynb
 
 The execution model is FP32, just convert to ONNX type. No optimization cause I dont find it necessary for my research scope.
 
