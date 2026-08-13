@@ -8,7 +8,7 @@ The YOLO training code is in violence_yolo.ipynb, the temporal classifier traini
 
 The execution model is FP32, just convert to ONNX type. No optimization cause I dont find it necessary for my research scope.
 
-There are some data processing, debugging, cleaning, … scripts I dont show here cause lost. But testing data is preserved and keep untouched for formal test. I use a sliding window to "detect" the highest fight probability (of Temporal Classifier).
+There are some data processing, debugging, cleaning, … scripts I dont show here cause lost. But testing data is preserved and keep untouched for formal test. I use a sliding window to "detect" the highest fight probability (from Temporal Classifier).
 
 Lessons:
 
