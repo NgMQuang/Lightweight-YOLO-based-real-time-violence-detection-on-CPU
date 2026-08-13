@@ -10,6 +10,8 @@ The execution model is FP32, just convert to ONNX type. No optimization cause I 
 
 There are some data processing, debugging, cleaning, … scripts I dont show here cause lost. But testing data is preserved and keep untouched for formal test. I use a sliding window to "detect" the highest fight probability (from Temporal Classifier).
 
+AI assistance: refactoring code, explaining libs and API, fixing bugs, documentation,  README.md designing.
+
 Lessons:
 
 - Do not use attention mechanism for this kind of application. It's easy to get overfitting and too heavy to operate.
